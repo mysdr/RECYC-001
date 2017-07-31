@@ -1,18 +1,15 @@
 <template>
-  <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
-    <h3 class="title">系统登录</h3>
-    <el-form-item prop="account">
-      <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号"></el-input>
-    </el-form-item>
-    <el-form-item prop="checkPass">
-      <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="密码"></el-input>
-    </el-form-item>
-    <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
-    <el-form-item style="width:100%;">
-      <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
-      <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
-    </el-form-item>
-  </el-form>
+  <div class="login-container">
+    <form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px"
+             class="demo-ruleForm login-form">
+      <h3 class="title">系统登录</h3>
+        <input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号" class="login-input">
+        <input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="密码" class="login-input">
+      <checkbox v-model="checked" checked class="remember">记住密码</checkbox>
+        <button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining" class="login-button">登录
+        </button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -46,26 +43,56 @@
 
 </script>
 
-<style scoped>
-  .login-container {
-    /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    background-clip: padding-box;
-    margin: 180px auto;
-    width: 350px;
-    padding: 35px 35px 15px 35px;
-    background: #fff;
-    border: 1px solid #eaeaea;
-    box-shadow: 0 0 25px #cac6c6;
-  }
-  .title {
-    margin: 0px auto 40px auto;
-    text-align: center;
-    color: #505458;
-  }
-  .remember {
-    margin: 0px 0px 35px 0px;
-  }
+<style lang="stylus">
+  bgcolor = #2d3a4b
+  buttoncolor = #20a0ff
+  color = #eeeeee
+  fontsize = 1.3em
+
+  .login-container
+    background-clip padding-box
+    padding 35px 35px 15px 35px
+    height 100vh
+    background-color bgcolor
+    font-size fontsize
+  .login-input
+    display inline-block
+    background transparent
+    border 1px solid rgba(255, 255, 255, 0.1)
+    -webkit-appearance: none
+    border-radius 5px
+    padding 12px 5px 12px 15px
+    margin-bottom 22px
+    color color
+    height 47px
+    width 100%
+  .login-button
+    color color
+    background-color buttoncolor
+    border 1px solid buttoncolor
+    display inline-block
+    line-height 1
+    white-space nowrap
+    cursor pointer
+    margin 0
+    padding 10px 15px
+    border-radius 4px
+  .title
+    font-size: 26px
+    font-weight: 400
+    color color
+    margin 0px auto 40px auto
+    text-align center
+    font-weight bold
+  .login-form
+    position: absolute
+    left 0
+    right 0
+    width 400px
+    padding 35px 35px 15px 35px
+    margin 120px auto
+  .remember
+    margin 0px 0px 35px 0px
+    color color
+
 </style>
