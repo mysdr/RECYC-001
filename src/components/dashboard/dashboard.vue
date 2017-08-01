@@ -32,7 +32,9 @@
           </Breadcrumb>
         </div>
         <div class="layout-content">
-          <div class="layout-content-main">内容区域</div>
+          <div class="layout-content-main">
+            <dash-user></dash-user>
+          </div>
         </div>
         <div class="layout-copy">
           2017 &copy; RE·CYC
@@ -41,7 +43,9 @@
     </Row>
   </div>
 </template>
-<script>
+<script type="text/ecmascript-6">
+  import DashUser from 'components/dash-user/dash-user'
+
   export default {
     data () {
       return {
@@ -64,10 +68,13 @@
           this.spanRight = 19
         }
       }
+    },
+    components: {
+      DashUser
     }
   }
 </script>
-<style scoped>
+<style scoped lang="stylus" rel="stylesheet/stylus">
   .layout {
     border: 1px solid #d7dde4;
     background: #f5f7f9;
