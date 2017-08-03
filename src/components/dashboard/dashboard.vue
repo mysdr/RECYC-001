@@ -23,6 +23,7 @@
           <i-button type="text" @click="toggleClick">
             <Icon type="navicon" size="32"></Icon>
           </i-button>
+          <screenfull class='screenfull'></screenfull>
         </div>
         <div class="layout-breadcrumb">
           <Breadcrumb>
@@ -45,7 +46,7 @@
 </template>
 <script type="text/ecmascript-6">
   import DashUser from 'components/dash-user/dash-user'
-
+  import Screenfull from 'components/Screenfull'
   export default {
     data () {
       return {
@@ -70,67 +71,73 @@
       }
     },
     components: {
-      DashUser
+      DashUser,
+      Screenfull
     }
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  .layout {
-    border: 1px solid #d7dde4;
-    background: #f5f7f9;
-    position: relative;
-    border-radius: 4px;
-    overflow: hidden;
-  }
+  .layout, .ivu-row-flex, .layout-menu-left, .ivu-col
+    height 100%
 
-  .layout-breadcrumb {
-    padding: 10px 15px 0;
-  }
+  .layout
+    border 1px solid #d7dde4
+    background #f5f7f9
+    position relative
+    border-radius 4px
+    overflow hidden
 
-  .layout-content {
-    min-height: 200px;
-    margin: 15px;
-    overflow: hidden;
-    border-radius: 4px;
-  }
+  .layout-breadcrumb
+    height 3%
+    min-height 30px
+    padding 10px 15px 0
 
-  .layout-content-main {
-    padding: 10px;
-  }
+  .layout-content
+    height 87%
+    min-height 200px
+    padding 15px
+    overflow hidden
+    border-radius 4px
 
-  .layout-copy {
-    text-align: center;
-    padding: 10px 0 20px;
-    color: #9ea7b4;
-  }
+  .layout-content-main
+    padding 10px
 
-  .layout-menu-left {
-    background: #464c5b;
-  }
+  .layout-copy
+    height 5%
+    min-height 20px
+    text-align: center
+    padding 10px 0 20px
+    color #9ea7b4
 
-  .layout-header {
-    height: 60px;
-    background: #fff;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-  }
+  .layout-menu-left
+    background: #464c5b
 
-  .layout-logo-left {
-    width: 90%;
-    height: 30px;
-    background: #5b6270;
-    border-radius: 3px;
-    margin: 15px auto;
-  }
+  .layout-header
+    height 5%
+    min-height 45px
+    background #fff
+    box-shadow 0 1px 1px rgba(0, 0, 0, .1)
 
-  .layout-ceiling-main a {
-    color: #9ba7b5;
-  }
+  .layout-logo-left
+    width 90%
+    height 30px
+    background #5b6270
+    border-radius 3px
+    margin 15px auto
 
-  .layout-hide-text .layout-text {
-    display: none;
-  }
+  .layout-ceiling-main a
+    color #9ba7b5
 
-  .ivu-col {
-    transition: width .2s ease-in-out;
-  }
+  .layout-hide-text .layout-text
+    display none
+
+  .ivu-col
+    transition width .2s ease-in-out
+
+  .screenfull
+    position absolute
+    right 10px
+    top 16px
+    color red
+
 </style>
