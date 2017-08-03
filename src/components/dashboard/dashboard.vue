@@ -23,7 +23,7 @@
           <i-button type="text" @click="toggleClick">
             <Icon type="navicon" size="32"></Icon>
           </i-button>
-          <screenfull class='screenfull'></screenfull>
+          <screen-full class='screenfull'></screen-full>
         </div>
         <div class="layout-breadcrumb">
           <Breadcrumb>
@@ -46,7 +46,7 @@
 </template>
 <script type="text/ecmascript-6">
   import DashUser from 'components/dash-user/dash-user'
-  import Screenfull from 'components/Screenfull'
+  import ScreenFull from 'base/screen-full/screen-full'
   export default {
     data () {
       return {
@@ -72,7 +72,7 @@
     },
     components: {
       DashUser,
-      Screenfull
+      ScreenFull
     }
   }
 </script>
