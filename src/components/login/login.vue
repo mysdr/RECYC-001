@@ -64,7 +64,7 @@
         }
         login(params).then(res => {
           console.log(res)
-          if (res.status === 0) {
+          if (res.code === 0) {
             let data = {
               token: res.token,
               timestamp: res.timestamp,
