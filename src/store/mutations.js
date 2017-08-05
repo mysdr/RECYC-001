@@ -12,6 +12,9 @@ const mutations = {
   },
   [types.SET_USER_LIST](state, users) {
     state.userList = users
+  },
+  [types.SET_USER](state, user) {
+    state.user = user
   }
 }
 

@@ -1,31 +1,33 @@
 <template>
   <div>
-    <Card class="user-card" v-for="user in userList">
-      <div class="userinfo-title">
-        <img :src="user.user_face" class="userinfo-head">
-        <div class="userinfo">
-          <div>
-            {{user.user_name}}
-            <span>
+    <div class="user-card" v-for="user in userList" @click="selectUser(user)">
+      <Card>
+        <div class="userinfo-title">
+          <img :src="user.user_face" class="userinfo-head">
+          <div class="userinfo">
+            <div>
+              {{user.user_name}}
+              <span>
               <Icon type="female" class="userinfo-gender female"></Icon>
             </span>
-          </div>
-          <div>
-            {{user.user_age}} 岁 | {{user.user_weight}} kg
-          </div>
-          <div>
-            {{user.user_connect}}
+            </div>
+            <div>
+              {{user.user_age}} 岁 | {{user.user_weight}} kg
+            </div>
+            <div>
+              {{user.user_connect}}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="userinfo-content">
-        <ul class="userinfo-item">
-          <li>项目一</li>
-          <li>项目二</li>
-          <li>项目三</li>
-        </ul>
-      </div>
-    </Card>
+        <div class="userinfo-content">
+          <ul class="userinfo-item">
+            <li>项目一</li>
+            <li>项目二</li>
+            <li>项目三</li>
+          </ul>
+        </div>
+      </Card>
+    </div>
   </div>
 </template>
 
@@ -64,8 +66,16 @@
       _showDetail() {
         show()
       },
+      selectUser(user) {
+        console.log('click')
+        this.$router.push({
+          path: `/user/${user.id}`
+        })
+        this.setUser(user)
+      },
       ...mapMutations({
-        setUserList: 'SET_USER_LIST'
+        setUserList: 'SET_USER_LIST',
+        setUser: 'SET_USER'
       })
     }
   }

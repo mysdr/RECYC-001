@@ -9,7 +9,7 @@
       <img src="../../common/image/default.png" class="userinfo-head">
       <div class="userinfo">
         <h3>
-          邓国雄
+          {{this.user.user_name}}
           <icon type="female" class="female"></icon>
         </h3>
         <h4>用户账号：airing</h4>
@@ -71,7 +71,7 @@
               3h
             </li>
             <li>
-              <star></star>
+              <star :size="24" :rating="5"></star>
             </li>
           </ul>
         </div>
@@ -90,7 +90,7 @@
               3h
             </li>
             <li>
-              <star></star>
+              <star :size="24" :rating="5"></star>
             </li>
           </ul>
         </div>
@@ -109,7 +109,7 @@
               3h
             </li>
             <li>
-              <star></star>
+              <star :size="24" :rating="5"></star>
             </li>
           </ul>
         </div>
@@ -128,7 +128,7 @@
               3h
             </li>
             <li>
-              <star></star>
+              <star :size="24" :rating="5"></star>
             </li>
           </ul>
         </div>
@@ -147,7 +147,7 @@
               3h
             </li>
             <li>
-              <star></star>
+              <star :size="24" :rating="5"></star>
             </li>
           </ul>
         </div>
@@ -184,8 +184,14 @@
 
 <script>
   import Star from 'base/star/star'
-  export default {
+  import { mapGetters } from 'vuex'
 
+  export default {
+    computed: {
+      ...mapGetters([
+        'user'
+      ])
+    },
     components: {
       Star
     }
@@ -207,7 +213,7 @@
     width 100%
     height 50px
     background #f5f7f9
-    box-shadow 0 1px 1px rgba(0,0,0,0.1)
+    box-shadow 0 1px 1px rgba(0, 0, 0, 0.1)
     font-size 2.5em
     color black
 
@@ -325,7 +331,6 @@
         font-weight 600
         color green
 
-
   .user-mid div:last-child
     margin-right 0
 
@@ -363,7 +368,6 @@
 
     .lesson li:first-child
       font-size 1.5em
-
 
   .user-bottomright
     float left

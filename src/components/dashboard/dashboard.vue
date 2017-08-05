@@ -27,7 +27,7 @@
         </div>
         <div class="layout-content">
           <div class="layout-content-main">
-            <dash-user></dash-user>
+            <router-view></router-view>
           </div>
         </div>
         <div class="layout-copy">

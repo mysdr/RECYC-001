@@ -4,7 +4,8 @@ const state = {
   token: loadToken(),
   timestamp: loadTimestamp(),
   uid: loadUid(),
-  userList: []
+  userList: [],
+  user: {}
 }
 
 export default state

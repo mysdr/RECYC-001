@@ -5,3 +5,5 @@ export const timestamp = state => state.timestamp
 export const uid = state => state.uid
 
 export const userList = state => state.userList
+
+export const user = state => state.user

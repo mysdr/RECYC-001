@@ -7,6 +7,18 @@ const Dashboard = (resolve) => {
   })
 }
 
+const DashUser = (resolve) => {
+  import('components/dash-user/dash-user').then((module) => {
+    resolve(module)
+  })
+}
+
+const EditorUser = (resolve) => {
+  import('components/editor-user/editor-user').then((module) => {
+    resolve(module)
+  })
+}
+
 const Login = (resolve) => {
   import('components/login/login').then((module) => {
     resolve(module)
@@ -33,7 +45,21 @@ export default new Router({
     },
     {
       path: '/',
-      component: Dashboard
+      redirect: '/user'
+    },
+    {
+      path: '/user',
+      component: Dashboard,
+      children: [
+        {
+          path: '/',
+          component: DashUser
+        },
+        {
+          path: ':id',
+          component: EditorUser
+        }
+      ]
     },
     {
       path: '*',
