@@ -25,13 +25,6 @@
           </i-button>
           <screen-full class='screenfull'></screen-full>
         </div>
-        <div class="layout-breadcrumb">
-          <Breadcrumb>
-            <Breadcrumb-item href="#">首页</Breadcrumb-item>
-            <Breadcrumb-item href="#">应用中心</Breadcrumb-item>
-            <Breadcrumb-item>某应用</Breadcrumb-item>
-          </Breadcrumb>
-        </div>
         <div class="layout-content">
           <div class="layout-content-main">
             <dash-user></dash-user>
@@ -47,6 +40,7 @@
 <script type="text/ecmascript-6">
   import DashUser from 'components/dash-user/dash-user'
   import ScreenFull from 'base/screen-full/screen-full'
+
   export default {
     data () {
       return {
