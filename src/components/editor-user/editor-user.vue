@@ -370,14 +370,13 @@
     div:last-child
       border-bottom 0
 
-  @media screen and (min-width: 1220px)
+  @media screen and (min-width: 1366px)
     //user
     .user
       height 200px
 
       .userinfo-head
-        max-width 120px
-        min-width 100px
+        width 100px
         margin 36px
 
       .userinfo
@@ -445,7 +444,7 @@
         margin 0 7.5%
         padding 20px 2px
 
-  @media screen and (min-width: 1024px) and (max-width: 1220px)
+  @media screen and (min-width: 1024px) and (max-width: 1366px)
     //user
     .user
       height 150px
@@ -453,7 +452,7 @@
       .userinfo-head
         max-width 100px
         min-width 90px
-        margin 30px 25px
+        margin 25px 25px
 
       .userinfo
         min-width 150px
