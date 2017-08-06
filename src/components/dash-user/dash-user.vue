@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="editor">
+      <span class="add" @click="_selectAdd()"></span>
+    </div>
     <div class="user-card" v-for="user in userList" @click="selectUser(user)">
       <Card>
         <div class="userinfo-title">
@@ -33,7 +36,7 @@
 
 <script type="text/ecmascript-6">
   import { mapGetters, mapMutations } from 'vuex'
-  import { list, show } from 'api/user'
+  import { list } from 'api/user'
 
   export default {
     created() {
@@ -63,8 +66,10 @@
           }
         })
       },
-      _showDetail() {
-        show()
+      _selectAdd() {
+        this.$router.push({
+          path: '/user/creator'
+        })
       },
       selectUser(user) {
         console.log('click')
@@ -82,10 +87,34 @@
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
+  @import "~common/stylus/mixin"
+
   pink = #FF69B4
   blue = #2d8cf0
   grey = #d7dde4
   white = #fff
+
+  .editor
+    position absolute
+    left 0
+    top 50px
+    width 100%
+    height 50px
+    background #f5f7f9
+    box-shadow 0 1px 1px rgba(0, 0, 0, 0.1)
+    font-size 2.5em
+    color black
+
+    .add
+      display inline-block
+      vertical-align top
+      margin 15px 5px
+      margin-left 20px
+      width 20px
+      height 20px
+      background-size 20px 20px
+      background-repeat no-repeat
+      bg-image('add')
 
   .user-card
     width 260px

@@ -19,6 +19,12 @@ const EditorUser = (resolve) => {
   })
 }
 
+const CreatorUser = (resolve) => {
+  import('components/creator-user/creator-user').then((module) => {
+    resolve(module)
+  })
+}
+
 const Login = (resolve) => {
   import('components/login/login').then((module) => {
     resolve(module)
@@ -54,6 +60,10 @@ export default new Router({
         {
           path: '/',
           component: DashUser
+        },
+        {
+          path: 'creator',
+          component: CreatorUser
         },
         {
           path: ':id',

@@ -3,56 +3,89 @@
     <div class="creation-info">
       <div>
         <div class="label">用户ID</div>
-        <Input v-model="value" placeholder="请输入..."></Input>
+        <Input ref="userId" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label">账户</div>
-        <Input v-model="value" placeholder="请输入..."></Input>
+        <Input ref="userAccount" placeholder="请输入..."/>
         <div class="label label-inline">密码</div>
-        <Input v-model="value" placeholder="请输入..."></Input>
+        <Input ref="userPassword" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label">用户名</div>
-        <Input v-model="value" placeholder="请输入..."></Input>
+        <Input ref="userName" placeholder="请输入..."/>
         <div class="label label-inline">性别</div>
-        <Radio-group>
+        <Radio-group ref="userSex">
           <Radio label="male">
             <Icon type="male"></Icon>
-            <span  class="radio">Male</span>
+            <span class="radio">Male</span>
           </Radio>
           <Radio label="female">
             <Icon type="female"></Icon>
-            <span  class="radio">Female</span>
+            <span class="radio">Female</span>
           </Radio>
         </Radio-group>
       </div>
       <div>
         <div class="label">年龄</div>
-        <Input v-model="value" placeholder="请输入..." class="input-small"></Input>
+        <Input ref="userAge" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">体重</div>
-        <Input v-model="value" placeholder="请输入..." class="input-small"></Input>
+        <Input ref="userWeight" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">体脂</div>
-        <Input v-model="value" placeholder="请输入..." class="input-small"></Input>
+        <Input ref="userFat" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">微信</div>
-        <Input v-model="value" placeholder="请输入..." ></Input>
+        <Input ref="userWechat" placeholder="请输入..."/>
         <div class="label label-inline ">联系方式</div>
-        <Input v-model="value" placeholder="请输入..."></Input>
+        <Input ref="userConnect" placeholder="请输入..."/>
       </div>
       <div class="remark">
         <div class="label">备注</div>
-        <Input v-model="value" type="textarea" placeholder="请输入..."  :row="5"></Input>
+        <Input ref="userNote" type="textarea" placeholder="请输入..." :row="5"/>
       </div>
-      <Button type="primary" class="btn-create">添加</Button>
+      <Button type="primary" class="btn-create" @click="_createUser()">添加</Button>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import { mapGetters } from 'vuex'
+  import { create } from 'api/user'
 
   export default {
-
+    computed: {
+      ...mapGetters([
+        'token',
+        'uid',
+        'timestamp'
+      ])
+    },
+    methods: {
+      _createUser() {
+        let params = {
+          uid: this.uid,
+          timestamp: this.timestamp,
+          token: this.token,
+          user_id: this.$refs.userId.value,
+          user_account: this.$refs.userAccount.value,
+          user_password: this.$refs.userPassword.value,
+          user_name: this.$refs.userName.value,
+          user_sex: this.$refs.userSex.value,
+          user_age: this.$refs.userAge.value,
+          user_weight: this.$refs.userWeight.value,
+          user_fat: this.$refs.userFat.value,
+          user_wechat: this.$refs.userWechat.value,
+          user_connect: this.$refs.userConnect.value,
+          user_note: this.$refs.userNote.value
+        }
+        create(params).then(res => {
+          if (res.code === 0) {
+            this.$swal('添加成功!', '您已成功录入该会员数据！', 'success')
+          }
+        })
+      }
+    }
   }
 </script>
 

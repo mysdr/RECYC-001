@@ -1,41 +1,37 @@
 <template>
   <div>
     <div class="editor">
-      <span class="add"></span>
-      <span class="delete"></span>
+      <span class="add" @click="_selectAdd()"></span>
+      <span class="delete" @click="_selectDelete()"></span>
       <span class="edit"></span>
     </div>
     <div class="user">
       <img src="../../common/image/default.png" class="userinfo-head">
       <div class="userinfo">
         <h3>
-          {{this.user.user_name}}
+          {{user.user_name}}
           <icon type="female" class="female"></icon>
         </h3>
-        <h4>用户账号：airing</h4>
+        <h4>用户账号：{{user.user_account}}</h4>
         <h4>用户注册时间：2017.06.01</h4>
       </div>
       <div class="remark">
-        <h3>
-          备注
-        </h3>
-        <h4>
-          备注……
-        </h4>
+        <h3>备注</h3>
+        <h4>{{user.user_note}}</h4>
       </div>
     </div>
     <div class="user-mid">
       <div>
         <div>
           <icon type="stats-bars" color="grey" size="25"></icon>
-          <h2>50KG</h2>
+          <h2>{{user.user_weight}}KG</h2>
           <h3>体重</h3>
           <icon type="arrow-down-c" color="green" size="18"></icon>
           <span>1KG</span>
         </div>
         <div>
           <icon type="stats-bars" color="grey" size="25"></icon>
-          <h2>15%</h2>
+          <h2>{{user.user_fat}}%</h2>
           <h3>体脂</h3>
           <icon type="arrow-down-c" color="green" size="18"></icon>
           <span>0.1%</span>
@@ -44,12 +40,12 @@
       <div>
         <div>
           <icon type="ios-timer-outline" color="grey" size="25"></icon>
-          <h2>30h</h2>
+          <h2>{{user.user_learn_time}}h</h2>
           <h3>课程时长</h3>
         </div>
         <div>
           <icon type="ios-star-outline" color="grey" size="25"></icon>
-          <h2>100</h2>
+          <h2>{{user.user_rating}}</h2>
           <h3>评价星数</h3>
         </div>
       </div>
@@ -58,18 +54,10 @@
       <div class="user-bottomleft">
         <div class="lesson">
           <ul>
-            <li>
-              2017.06.09
-            </li>
-            <li>
-              14:00 - 17:00
-            </li>
-            <li>
-              健身课程001
-            </li>
-            <li>
-              3h
-            </li>
+            <li>2017.06.09</li>
+            <li>14:00 - 17:00</li>
+            <li>健身课程001</li>
+            <li>3h</li>
             <li>
               <star :size="24" :rating="5" class="star"></star>
             </li>
@@ -77,18 +65,10 @@
         </div>
         <div class="lesson">
           <ul>
-            <li>
-              2017.06.09
-            </li>
-            <li>
-              14:00 - 17:00
-            </li>
-            <li>
-              健身课程001
-            </li>
-            <li>
-              3h
-            </li>
+            <li>2017.06.09</li>
+            <li>14:00 - 17:00</li>
+            <li>健身课程001</li>
+            <li>3h</li>
             <li>
               <star :size="24" :rating="5" class="star"></star>
             </li>
@@ -96,18 +76,10 @@
         </div>
         <div class="lesson">
           <ul>
-            <li>
-              2017.06.09
-            </li>
-            <li>
-              14:00 - 17:00
-            </li>
-            <li>
-              健身课程001
-            </li>
-            <li>
-              3h
-            </li>
+            <li>2017.06.09</li>
+            <li>14:00 - 17:00</li>
+            <li>健身课程001</li>
+            <li>3h</li>
             <li>
               <star :size="24" :rating="5" class="star"></star>
             </li>
@@ -115,18 +87,10 @@
         </div>
         <div class="lesson">
           <ul>
-            <li>
-              2017.06.09
-            </li>
-            <li>
-              14:00 - 17:00
-            </li>
-            <li>
-              健身课程001
-            </li>
-            <li>
-              3h
-            </li>
+            <li>2017.06.09</li>
+            <li>14:00 - 17:00</li>
+            <li>健身课程001</li>
+            <li>3h</li>
             <li>
               <star :size="24" :rating="5" class="star"></star>
             </li>
@@ -134,18 +98,10 @@
         </div>
         <div class="lesson">
           <ul>
-            <li>
-              2017.06.09
-            </li>
-            <li>
-              14:00 - 17:00
-            </li>
-            <li>
-              健身课程001
-            </li>
-            <li>
-              3h
-            </li>
+            <li>2017.06.09</li>
+            <li>14:00 - 17:00</li>
+            <li>健身课程001</li>
+            <li>3h</li>
             <li>
               <star :size="24" :rating="5" class="star"></star>
             </li>
@@ -154,28 +110,16 @@
       </div>
       <div class="user-bottomright">
         <div>
-          <h2>
-            ID
-          </h2>
-          <h3>
-            1123581321
-          </h3>
+          <h2>ID</h2>
+          <h3>{{user.user_id}}</h3>
         </div>
         <div>
-          <h2>
-            微信
-          </h2>
-          <h3>
-            Wechat
-          </h3>
+          <h2>微信</h2>
+          <h3>{{user.user_wechat}}</h3>
         </div>
         <div>
-          <h2>
-            电话
-          </h2>
-          <h3>
-            110
-          </h3>
+          <h2>电话</h2>
+          <h3>{{user.user_connect}}</h3>
         </div>
       </div>
     </div>
@@ -185,12 +129,53 @@
 <script>
   import Star from 'base/star/star'
   import { mapGetters } from 'vuex'
+  import { remove } from 'api/user'
 
   export default {
     computed: {
       ...mapGetters([
+        'token',
+        'uid',
+        'timestamp',
         'user'
       ])
+    },
+    methods: {
+      _selectAdd() {
+        this.$router.push({
+          path: '/user/creator'
+        })
+      },
+      _selectDelete() {
+        let params = {
+          uid: this.uid,
+          token: this.token,
+          timestamp: this.timestamp
+        }
+        this.$swal({
+          title: '是否确定',
+          text: '您将删除该用户，该操作不可逆!',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#DD6B55',
+          confirmButtonText: '删除',
+          cancelButtonText: '取消',
+          closeOnConfirm: false,
+          closeOnCancel: false
+        },
+        function (isConfirm) {
+          if (isConfirm) {
+            remove(params, this.user.id).then(res => {
+              if (res.code === 0) {
+                this.$swal('删除成功!', '您已成功删除该会员数据！', 'success')
+                this.$router.push({
+                  path: '/'
+                })
+              }
+            })
+          }
+        })
+      }
     },
     components: {
       Star
@@ -268,7 +253,6 @@
       float left
       margin-top 60px
 
-
       .female
         color pink
 
@@ -311,7 +295,6 @@
       margin 0
       text-align center
 
-
       span
         font-weight 600
         color green
@@ -346,7 +329,6 @@
       font-weight 600
       text-align center
 
-
   .user-bottomright
     float left
     width 34%
@@ -371,7 +353,7 @@
       border-bottom 0
 
   @media screen and (min-width: 1366px)
-    //user
+  //user
     .user
       height 200px
 
@@ -398,7 +380,7 @@
       .remark h4
         font-size 1.2em
 
-    //user-mid
+  //user-mid
     .user-mid div
       height 200px
 
@@ -411,7 +393,7 @@
     .user-mid span
       font-size 1.2em
 
-    //user-bottom
+  //user-bottom
     .user-bottomleft
       min-width 570px
       height 300px
@@ -445,7 +427,7 @@
         padding 20px 2px
 
   @media screen and (min-width: 1024px) and (max-width: 1366px)
-    //user
+  //user
     .user
       height 150px
 
@@ -473,7 +455,7 @@
       .remark h4
         font-size 1.1em
 
-    //user-mid
+  //user-mid
     .user-mid div
       height 150px
 
@@ -486,7 +468,7 @@
     .user-mid span
       font-size 1.1em
 
-    //user-bottom
+  //user-bottom
     .user-bottomleft
       min-width 400px
       height 200px

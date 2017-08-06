@@ -10,3 +10,13 @@ export function show(params, id) {
   const url = HOST + `/v1/users/${id}`
   return jsonp(url, params)
 }
+
+export function create(params) {
+  const url = HOST + `/v1/users/create`
+  return jsonp(url, params)
+}
+
+export function remove(params, id) {
+  const url = HOST + `/v1/users/remove/${id}`
+  return jsonp(url, params)
+}
