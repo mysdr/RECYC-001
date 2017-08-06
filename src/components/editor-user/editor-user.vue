@@ -71,14 +71,14 @@
               3h
             </li>
             <li>
-              <star :size="24" :rating="5"></star>
+              <star :size="24" :rating="5" class="star"></star>
             </li>
           </ul>
         </div>
         <div class="lesson">
           <ul>
             <li>
-              2017.06.10
+              2017.06.09
             </li>
             <li>
               14:00 - 17:00
@@ -90,14 +90,14 @@
               3h
             </li>
             <li>
-              <star :size="24" :rating="5"></star>
+              <star :size="24" :rating="5" class="star"></star>
             </li>
           </ul>
         </div>
         <div class="lesson">
           <ul>
             <li>
-              2017.06.10
+              2017.06.09
             </li>
             <li>
               14:00 - 17:00
@@ -109,14 +109,14 @@
               3h
             </li>
             <li>
-              <star :size="24" :rating="5"></star>
+              <star :size="24" :rating="5" class="star"></star>
             </li>
           </ul>
         </div>
         <div class="lesson">
           <ul>
             <li>
-              2017.06.10
+              2017.06.09
             </li>
             <li>
               14:00 - 17:00
@@ -128,14 +128,14 @@
               3h
             </li>
             <li>
-              <star :size="24" :rating="5"></star>
+              <star :size="24" :rating="5" class="star"></star>
             </li>
           </ul>
         </div>
         <div class="lesson">
           <ul>
             <li>
-              2017.06.10
+              2017.06.09
             </li>
             <li>
               14:00 - 17:00
@@ -147,7 +147,7 @@
               3h
             </li>
             <li>
-              <star :size="24" :rating="5"></star>
+              <star :size="24" :rating="5" class="star"></star>
             </li>
           </ul>
         </div>
@@ -250,7 +250,6 @@
 
   .user
     width 100%
-    height 200px
     margin-top 50px
     background white
     -webkit-border-radius 5px
@@ -259,8 +258,7 @@
 
     .userinfo-head
       float left
-      min-width 100px
-      margin 36px
+      width 10%
       margin-bottom 0
       -webkit-border-radius 50%
       -moz-border-radius 50%
@@ -268,13 +266,8 @@
 
     .userinfo
       float left
-      width 20%
-      min-width 200px
-      margin 36px
       margin-top 60px
 
-    .userinfo h3
-      font-size 1.5em
 
       .female
         color pink
@@ -284,7 +277,6 @@
 
     .userinfo h4
       margin-top 10px
-      font-size 1.2em
       color grey
 
     .userinfo h4:last-child
@@ -293,23 +285,20 @@
     .remark
       float left
       width 40%
-      min-width 300px
       height 100px
       margin 36px
+      margin-bottom 0
 
     .remark h3
-      font-size 1.5em
       color white
 
     .remark h4
       margin-top 10px
-      font-size 1.2em
       color grey
 
   .user-mid div
     float left
     width 49%
-    height 200px
     margin-top 20px
     margin-right 2%
     background white
@@ -320,14 +309,10 @@
     div
       width 50%
       margin 0
-      padding-top 35px
       text-align center
 
-      h2
-        font-size 3em
 
       span
-        font-size 1.2em
         font-weight 600
         color green
 
@@ -346,9 +331,7 @@
     border-radius 5px
 
     .lesson
-      width 90%
-      height 20%
-      margin 0 5%
+      height 19.5%
       border-bottom 1px solid grey
 
     .lesson:last-child
@@ -359,15 +342,10 @@
 
     .lesson li
       float left
-      width 18%
-      padding-right 15px
-      font-size 1.25em
+      width 20%
       font-weight 600
       text-align center
-      line-height 60px
 
-    .lesson li:first-child
-      font-size 1.5em
 
   .user-bottomright
     float left
@@ -381,19 +359,164 @@
 
     div
       clear both
-      margin 0 7.5%
-      padding 20px 2px
       width 85%
       height 33%
       border-bottom 1px solid lightgrey
 
       h3
         margin-top 5px
-        font-size 1.3em
         color grey
 
     div:last-child
       border-bottom 0
 
+  @media screen and (min-width: 1220px)
+    //user
+    .user
+      height 200px
 
+      .userinfo-head
+        max-width 120px
+        min-width 100px
+        margin 36px
+
+      .userinfo
+        min-width 200px
+        margin 36px
+
+      .userinfo h3
+        font-size 1.5em
+
+      .userinfo h4
+        font-size 1.2em
+
+      .remark
+        min-width 300px
+
+      .remark h3
+        font-size 1.5em
+
+      .remark h4
+        font-size 1.2em
+
+    //user-mid
+    .user-mid div
+      height 200px
+
+      div
+        padding-top 35px
+
+    .user-mid h2
+      font-size 3em
+
+    .user-mid span
+      font-size 1.2em
+
+    //user-bottom
+    .user-bottomleft
+      min-width 570px
+      height 300px
+
+      .lesson
+        width 90%
+        margin 0 5%
+
+      .lesson li
+        min-width 105px
+        padding-right 15px
+        font-size 1.25em
+        line-height 55px
+
+      .lesson li:first-child
+        font-size 1.5em
+
+      .star
+        height 55px
+        padding-top 5px
+        line-height 55px
+
+    .user-bottomright
+      height 300px
+
+      h3
+        font-size 1.3em
+
+      div
+        margin 0 7.5%
+        padding 20px 2px
+
+  @media screen and (min-width: 1024px) and (max-width: 1220px)
+    //user
+    .user
+      height 150px
+
+      .userinfo-head
+        max-width 100px
+        min-width 90px
+        margin 30px 25px
+
+      .userinfo
+        min-width 150px
+        margin 36px 25px
+
+      .userinfo h3
+        font-size 1.3em
+
+      .userinfo h4
+        font-size 1.1em
+
+      .remark
+        min-width 200px
+
+      .remark h3
+        font-size 1.3em
+
+      .remark h4
+        font-size 1.1em
+
+    //user-mid
+    .user-mid div
+      height 150px
+
+      div
+        padding-top 20px
+
+    .user-mid h2
+      font-size 2em
+
+    .user-mid span
+      font-size 1.1em
+
+    //user-bottom
+    .user-bottomleft
+      min-width 400px
+      height 200px
+
+      .lesson
+        width 96%
+        margin 0 2%
+
+      .lesson li
+        min-width 80px
+        padding-right 10px
+        font-size 1.1em
+        line-height 35px
+
+      .lesson li:first-child
+        font-size 1.2em
+
+      .star
+        height 30px
+        padding-top 5px
+        line-height 30px
+
+    .user-bottomright
+      height 200px
+
+      h3
+        font-size 1.3em
+
+      div
+        margin 0 5%
+        padding 10px 2px
 </style>
