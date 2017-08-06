@@ -15,7 +15,7 @@
         <div class="label">用户名</div>
         <Input ref="userName" placeholder="请输入..."/>
         <div class="label label-inline">性别</div>
-        <Radio-group ref="userSex">
+        <Radio-group ref="userSex" v-model="gender">
           <Radio label="male">
             <Icon type="male"></Icon>
             <span class="radio">Male</span>
@@ -84,6 +84,13 @@
             this.$swal('添加成功!', '您已成功录入该会员数据！', 'success')
           }
         })
+      }
+    },
+
+    // 使用v-model进行双向绑定获得值，即可进行选择
+    data() {
+      return {
+        gender: 'male'
       }
     }
   }
