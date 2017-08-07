@@ -3,19 +3,19 @@
     <div class="creation-info">
       <div>
         <div class="label">用户ID</div>
-        <Input ref="userId" @on-blur="_checkInput()" placeholder="请输入..."/>
+        <Input ref="userId" v-model="userId"  placeholder="请输入..."/>
       </div>
       <div>
         <div class="label">账户</div>
-        <Input ref="userAccount" placeholder="请输入..."/>
+        <Input ref="userAccount" v-model="userAccount" placeholder="请输入..."/>
         <div class="label label-inline">密码</div>
-        <Input ref="userPassword" placeholder="请输入..."/>
+        <Input ref="userPassword" v-model="userPassword" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label">用户名</div>
-        <Input ref="userName" placeholder="请输入..."/>
+        <Input ref="userName"  v-model="userName" placeholder="请输入..."/>
         <div class="label label-inline">性别</div>
-        <Radio-group ref="userSex" v-model="gender">
+        <Radio-group ref="userSex" v-model="userGender">
           <Radio label="male">
             <Icon type="male"></Icon>
             <span class="radio">Male</span>
@@ -28,21 +28,21 @@
       </div>
       <div>
         <div class="label">年龄</div>
-        <Input ref="userAge" placeholder="请输入..." class="input-small"/>
+        <Input ref="userAge"  v-model="userAge" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">体重</div>
-        <Input ref="userWeight" placeholder="请输入..." class="input-small"/>
+        <Input ref="userWeight"  v-model="userWeight" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">体脂</div>
-        <Input ref="userFat" placeholder="请输入..." class="input-small"/>
+        <Input ref="userFat"  v-model="userFat" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">微信</div>
-        <Input ref="userWechat" placeholder="请输入..."/>
+        <Input ref="userWechat"  v-model="userWechat" placeholder="请输入..."/>
         <div class="label label-inline ">联系方式</div>
-        <Input ref="userConnect" placeholder="请输入..."/>
+        <Input ref="userConnect"  v-model="userConnect" placeholder="请输入..."/>
       </div>
       <div class="remark">
         <div class="label">备注</div>
-        <Input ref="userNote" type="textarea" placeholder="请输入..." rows="5" class="textarea"/>
+        <Input ref="userNote"  v-model="userNote" type="textarea" placeholder="请输入..." rows="5" class="textarea"/>
       </div>
       <Button type="primary" class="btn-create" @click="_createUser()">添加</Button>
     </div>
@@ -64,34 +64,37 @@
     },
     methods: {
       _createUser() {
-        let params = {
-          uid: this.uid,
-          timestamp: this.timestamp,
-          token: this.token,
-          user_id: this.$refs.userId.value,
-          user_account: this.$refs.userAccount.value,
-          user_password: sha1(this.$refs.userPassword.value),
-          user_name: this.$refs.userName.value,
-          user_sex: this.$refs.userSex.value === 'male' ? 0 : 1,
-          user_age: this.$refs.userAge.value,
-          user_weight: this.$refs.userWeight.value,
-          user_fat: this.$refs.userFat.value,
-          user_wechat: this.$refs.userWechat.value,
-          user_connect: this.$refs.userConnect.value,
-          user_note: this.$refs.userNote.value
-        }
-        create(params).then(res => {
-          if (res.code === 0) {
-            this.$swal('添加成功!', '您已成功录入该会员数据！', 'success')
+        let userInfo = [this.userId, this.userAccount, this.userPassword, this.userName, this.userGender, this.userAge, this.userWeight, this.userFat, this.userWechat, this.userConnect, this.userNote]
+        let i = 0
+        userInfo.forEach((item) => {
+          if (!item) {
+            i++
           }
         })
-      },
-      _checkInput(value) {
-        console.log(value)
-        if (value) {
-          console.log(value)
-        } else {
-          console.log('err')
+        if (i === 0) {
+          let params = {
+            uid: this.uid,
+            timestamp: this.timestamp,
+            token: this.token,
+            user_id: this.$refs.userId.value,
+            user_account: this.$refs.userAccount.value,
+            user_password: sha1(this.$refs.userPassword.value),
+            user_name: this.$refs.userName.value,
+            user_sex: this.$refs.userSex.value === 'male' ? 0 : 1,
+            user_age: this.$refs.userAge.value,
+            user_weight: this.$refs.userWeight.value,
+            user_fat: this.$refs.userFat.value,
+            user_wechat: this.$refs.userWechat.value,
+            user_connect: this.$refs.userConnect.value,
+            user_note: this.$refs.userNote.value
+          }
+          create(params).then(res => {
+            if (res.code === 0) {
+              this.$swal('添加成功!', '您已成功录入该会员数据！', 'success')
+            }
+          })
+        } else if (i > 0) {
+          this.$swal('信息不全！', '请确保您已填完全部信息。', 'error')
         }
       }
     },
@@ -99,7 +102,17 @@
     // 使用v-model进行双向绑定获得值，即可进行选择
     data() {
       return {
-        gender: 'male'
+        userId: '',
+        userAccount: '',
+        userPassword: '',
+        userName: '',
+        userGender: 'male',
+        userAge: '',
+        userWeight: '',
+        userFat: '',
+        userWechat: '',
+        userConnect: '',
+        userNote: ''
       }
     }
   }

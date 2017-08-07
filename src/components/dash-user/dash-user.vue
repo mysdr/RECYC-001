@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="editor">
-      <span class="add" @click="_selectAdd()"></span>
+    <div class="editor" @click="_selectAdd()">
+      <Icon type="android-add-circle" class="add"></Icon>
     </div>
     <div class="user-card" v-for="user in userList" @click="selectUser(user)">
       <Card>
@@ -86,7 +86,6 @@
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  @import "~common/stylus/mixin"
 
   pink = #FF69B4
   blue = #2d8cf0
@@ -95,25 +94,21 @@
 
   .editor
     position absolute
-    left 0
-    top 50px
-    width 100%
-    height 50px
-    background #f5f7f9
-    box-shadow 0 1px 1px rgba(0, 0, 0, 0.1)
-    font-size 2.5em
-    color black
+    top 90%
+    left 93%
+    width 40px
+    height 40px
 
     .add
       display inline-block
       vertical-align top
-      margin 15px 5px
-      margin-left 20px
-      width 20px
-      height 20px
-      background-size 20px 20px
-      background-repeat no-repeat
-      bg-image('add')
+      width 100%
+      height 100%
+      font-size 3.8em
+      color blue
+
+    .add:hover
+      color rgba(45,140,240,0.7)
 
   .user-card
     width 260px
