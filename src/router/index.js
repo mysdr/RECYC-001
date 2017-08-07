@@ -25,6 +25,42 @@ const CreatorUser = (resolve) => {
   })
 }
 
+const DashCourse = (resolve) => {
+  import('components/dash-course/dash-course').then((module) => {
+    resolve(module)
+  })
+}
+
+const EditorCourse = (resolve) => {
+  import('components/editor-course/editor-course').then((module) => {
+    resolve(module)
+  })
+}
+
+const CreatorCourse = (resolve) => {
+  import('components/creator-course/creator-course').then((module) => {
+    resolve(module)
+  })
+}
+
+const DashBike = (resolve) => {
+  import('components/dash-bike/dash-bike').then((module) => {
+    resolve(module)
+  })
+}
+
+const EditorBike = (resolve) => {
+  import('components/editor-bike/editor-bike').then((module) => {
+    resolve(module)
+  })
+}
+
+const CreatorBike = (resolve) => {
+  import('components/creator-bike/creator-bike').then((module) => {
+    resolve(module)
+  })
+}
+
 const Login = (resolve) => {
   import('components/login/login').then((module) => {
     resolve(module)
@@ -68,6 +104,42 @@ export default new Router({
         {
           path: ':id',
           component: EditorUser
+        }
+      ]
+    },
+    {
+      path: '/course',
+      component: Dashboard,
+      children: [
+        {
+          path: '/',
+          component: DashCourse
+        },
+        {
+          path: 'creator',
+          component: CreatorCourse
+        },
+        {
+          path: ':id',
+          component: EditorCourse
+        }
+      ]
+    },
+    {
+      path: '/bike',
+      component: Dashboard,
+      children: [
+        {
+          path: '/',
+          component: DashBike
+        },
+        {
+          path: 'creator',
+          component: CreatorBike
+        },
+        {
+          path: ':id',
+          component: EditorBike
         }
       ]
     },

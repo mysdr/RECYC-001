@@ -3,13 +3,13 @@
     <div class="editor">
       <span class="add" @click="_selectAdd()"></span>
       <span class="delete" @click="_selectDelete()"></span>
-      <span class="edit"></span>
+      <span class="edit" @click="_selectEdit()"></span>
     </div>
     <div class="user">
-      <img src="../../common/image/default.png" class="userinfo-head">
+      <img :src="user.user_face" class="userinfo-head">
       <div class="userinfo">
         <h3>
-          {{user.user_name}}
+          <span ref="userNameField" @click="_edit('user_name')">{{user.user_name}}</span>
           <icon type="female" class="female"></icon>
         </h3>
         <h4>用户账号：{{user.user_account}}</h4>
@@ -17,21 +17,21 @@
       </div>
       <div class="remark">
         <h3>备注</h3>
-        <h4>{{user.user_note}}</h4>
+        <h4 ref="userNoteField" @click="_edit('user_note')">{{user.user_note}}</h4>
       </div>
     </div>
     <div class="user-mid">
       <div>
         <div>
           <icon type="stats-bars" color="grey" size="25"></icon>
-          <h2>{{user.user_weight}}KG</h2>
+          <h2 ref="userWeightField" @click="_edit('user_weight')">{{user.user_weight}}KG</h2>
           <h3>体重</h3>
           <icon type="arrow-down-c" color="green" size="18"></icon>
           <span>1KG</span>
         </div>
         <div>
           <icon type="stats-bars" color="grey" size="25"></icon>
-          <h2>{{user.user_fat}}%</h2>
+          <h2 ref="userFatField" @click="_edit('user_fat')">{{user.user_fat}}%</h2>
           <h3>体脂</h3>
           <icon type="arrow-down-c" color="green" size="18"></icon>
           <span>0.1%</span>
@@ -111,7 +111,7 @@
       <div class="user-bottomright">
         <div>
           <h2>ID</h2>
-          <h3>{{user.user_id}}</h3>
+          <h3 ref="userIdField" @click="_edit('user_id')">{{user.user_id}}</h3>
         </div>
         <div>
           <h2>微信</h2>
@@ -119,7 +119,7 @@
         </div>
         <div>
           <h2>电话</h2>
-          <h3>{{user.user_connect}}</h3>
+          <h3 ref="userConnectField" @click="_edit('user_connect')">{{user.user_connect}}</h3>
         </div>
       </div>
     </div>
@@ -128,10 +128,15 @@
 
 <script>
   import Star from 'base/star/star'
-  import { mapGetters } from 'vuex'
-  import { remove } from 'api/user'
+  import { mapGetters, mapMutations } from 'vuex'
+  import { remove, edit } from 'api/user'
 
   export default {
+    data () {
+      return {
+        mode: 0
+      }
+    },
     computed: {
       ...mapGetters([
         'token',
@@ -162,8 +167,7 @@
           cancelButtonText: '取消',
           closeOnConfirm: false,
           closeOnCancel: false
-        },
-        function (isConfirm) {
+        }, function (isConfirm) {
           if (isConfirm) {
             remove(params, this.user.id).then(res => {
               if (res.code === 0) {
@@ -175,7 +179,55 @@
             })
           }
         })
-      }
+      },
+      _selectEdit() {
+        if (this.mode === 0) {
+          this.$swal('编辑模式！', '您已进入编辑模式，点击蓝色元素可以修改用户数据，再次点击编辑按钮可以退出编辑模式。', 'success')
+          this.mode = 1
+          this.$refs.userNameField.style.color = '#0F88EB'
+          this.$refs.userNoteField.style.color = '#0F88EB'
+          this.$refs.userWeightField.style.color = '#0F88EB'
+          this.$refs.userFatField.style.color = '#0F88EB'
+          this.$refs.userIdField.style.color = '#0F88EB'
+          this.$refs.userConnectField.style.color = '#0F88EB'
+        } else {
+          this.$swal('退出编辑模式！', '您已退出编辑模式，再次点击编辑按钮可以进入编辑模式。', 'success')
+          this.$refs.userNameField.style.color = 'black'
+          this.$refs.userNoteField.style.color = 'black'
+          this.$refs.userWeightField.style.color = 'black'
+          this.$refs.userFatField.style.color = 'black'
+          this.$refs.userIdField.style.color = 'black'
+          this.$refs.userConnectField.style.color = 'black'
+          this.mode = 0
+        }
+      },
+      _edit(field) {
+        if (this.mode === 1) {
+          this.$swal({
+            title: '请输入更新的数据内容',
+            input: 'value',
+            showCancelButton: true,
+            confirmButtonText: '确定',
+            showLoaderOnConfirm: true,
+            allowOutsideClick: false
+          }).then(function (value) {
+            let params = {
+              uid: this.uid,
+              token: this.token,
+              timestamp: this.timestamp,
+              field: value
+            }
+            edit(params, this.user.id, field).then(res => {
+              if (res.code === 0) {
+                this.setUser(res.user)
+              }
+            })
+          })
+        }
+      },
+      ...mapMutations({
+        setUser: 'SET_USER'
+      })
     },
     components: {
       Star

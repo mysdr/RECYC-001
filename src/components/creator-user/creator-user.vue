@@ -50,6 +50,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import sha1 from 'sha1'
   import { mapGetters } from 'vuex'
   import { create } from 'api/user'
 
@@ -69,9 +70,9 @@
           token: this.token,
           user_id: this.$refs.userId.value,
           user_account: this.$refs.userAccount.value,
-          user_password: this.$refs.userPassword.value,
+          user_password: sha1(this.$refs.userPassword.value),
           user_name: this.$refs.userName.value,
-          user_sex: this.$refs.userSex.value,
+          user_sex: this.$refs.userSex.value === 'male' ? 0 : 1,
           user_age: this.$refs.userAge.value,
           user_weight: this.$refs.userWeight.value,
           user_fat: this.$refs.userFat.value,

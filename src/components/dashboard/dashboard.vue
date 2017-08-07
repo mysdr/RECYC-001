@@ -5,16 +5,22 @@
         <Menu active-name="1" theme="dark" width="auto">
           <div class="layout-logo-left"></div>
           <Menu-item name="1">
-            <Icon type="ios-navigate" :size="iconSize"></Icon>
-            <span class="layout-text">用户管理</span>
+            <div @click="_selectUser()">
+              <Icon type="ios-navigate" :size="iconSize"></Icon>
+              <span class="layout-text">用户管理</span>
+            </div>
           </Menu-item>
           <Menu-item name="2">
-            <Icon type="ios-keypad" :size="iconSize"></Icon>
-            <span class="layout-text">课程管理</span>
+            <div @click="_selectCourse()">
+              <Icon type="ios-keypad" :size="iconSize"></Icon>
+              <span class="layout-text">课程管理</span>
+            </div>
           </Menu-item>
           <Menu-item name="3">
-            <Icon type="ios-analytics" :size="iconSize"></Icon>
-            <span class="layout-text">车辆管理</span>
+            <div @click="_selectBike()">
+              <Icon type="ios-analytics" :size="iconSize"></Icon>
+              <span class="layout-text">车辆管理</span>
+            </div>
           </Menu-item>
         </Menu>
       </i-col>
@@ -62,6 +68,21 @@
           this.spanLeft = 5
           this.spanRight = 19
         }
+      },
+      _selectUser() {
+        this.$router.push({
+          path: '/'
+        })
+      },
+      _selectCourse() {
+        this.$router.push({
+          path: '/course'
+        })
+      },
+      _selectBike() {
+        this.$router.push({
+          path: '/bike'
+        })
       }
     },
     components: {

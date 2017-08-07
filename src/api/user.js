@@ -20,3 +20,8 @@ export function remove(params, id) {
   const url = HOST + `/v1/users/remove/${id}`
   return jsonp(url, params)
 }
+
+export function edit(params, id, field) {
+  const url = HOST + `/v1/users/edit/${field}/${id}`
+  return jsonp(url, params)
+}

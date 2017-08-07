@@ -72,7 +72,6 @@
         })
       },
       selectUser(user) {
-        console.log('click')
         this.$router.push({
           path: `/user/${user.id}`
         })
