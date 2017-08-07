@@ -108,6 +108,8 @@
     padding 10px 15px 0
 
   .layout-content
+    position relative
+    width 100%
     height 87%
     min-height 200px
     padding 15px
@@ -115,7 +117,13 @@
     border-radius 4px
 
   .layout-content-main
+    position absolute
+    top 0
+    bottom 0
+    left 0
+    right -17px
     padding 10px
+    overflow-y scroll
 
   .layout-copy
     height 5%

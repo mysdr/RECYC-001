@@ -246,7 +246,7 @@
   .editor
     position absolute
     left 0
-    top 50px
+    top 0
     width 100%
     height 50px
     background #f5f7f9
@@ -287,11 +287,15 @@
 
   .user
     width 100%
-    margin-top 50px
+    margin-top 45px
     background white
     -webkit-border-radius 5px
     -moz-border-radius 5px
     border-radius 5px
+    @media (min-width:1366px)
+      height 200px
+    @media (min-width:1024px) and (max-width:1366px)
+      height 150px
 
     .userinfo-head
       float left
@@ -300,10 +304,23 @@
       -webkit-border-radius 50%
       -moz-border-radius 50%
       border-radius 50%
+      @media (min-width:1366px)
+        width 100px
+        margin 36px
+      @media (min-width:1024px) and (max-width:1366px)
+        max-width 100px
+        min-width 90px
+        margin 25px
 
     .userinfo
       float left
       margin-top 60px
+      @media (min-width:1366px)
+        min-width 200px
+        margin 36px
+      @media (min-width:1024px) and (max-width:1366px)
+        min-width 150px
+        margin 36px 25px
 
       .female
         color pink
@@ -311,9 +328,19 @@
       .male
         color blue
 
+    .userinfo h3
+      @media (min-width:1366px)
+        font-size 1.5em
+      @media (min-width:1024px) and (max-width:1366px)
+        font-size 1.3em
+
     .userinfo h4
       margin-top 10px
       color grey
+      @media (min-width:1366px)
+        font-size 1.2em
+      @media (min-width:1024px) and (max-width:1366px)
+        font-size 1.1em
 
     .userinfo h4:last-child
       margin-top 0
@@ -324,13 +351,31 @@
       height 100px
       margin 36px
       margin-bottom 0
+      @media (min-width:1366px)
+        min-width 300px
+      @media (min-width:1024px) and (max-width:1366px)
+        min-width 200px
 
     .remark h3
       color white
+      @media (min-width:1366px)
+        font-size 1.5em
+      @media (min-width:1024px) and (max-width:1366px)
+        font-size 1.3em
 
     .remark h4
       margin-top 10px
       color grey
+      @media (min-width:1366px)
+        font-size 1.2em
+      @media (min-width:1024px) and (max-width:1366px)
+        font-size 1.1em
+
+  .user-mid
+    @media (min-width:1366px)
+      height 200px
+    @media (min-width:1024px) and (max-width:1366px)
+      height 150px
 
   .user-mid div
     float left
@@ -341,33 +386,68 @@
     -webkit-border-radius 5px
     -moz-border-radius 5px
     border-radius 5px
+    @media (min-width:1366px)
+      height 200px
+    @media (min-width:1024px) and (max-width:1366px)
+      height 150px
 
     div
       width 50%
       margin 0
       text-align center
+      @media (min-width:1366px)
+        padding-top 35px
+      @media (min-width:1024px) and (max-width:1366px)
+        padding-top 20px
+
+      h2
+        @media (min-width:1366px)
+          font-size 3em
+        @media (min-width:1024px) and (max-width:1366px)
+          font-size 2em
 
       span
         font-weight 600
         color green
+        @media (min-width:1366px)
+          font-size 1.2em
+        @media (min-width:1024px) and (max-width:1366px)
+          font-size 1.1em
 
   .user-mid div:last-child
     margin-right 0
 
+  .user-bottom
+    @media (min-width:1366px)
+      height 300px
+    @media (min-width:1024px) and (max-width:1366px)
+      height 200px
+
   .user-bottomleft
     float left
     width 64%
-    height 300px
     margin-top 20px
     margin-right 2%
     background white
     -webkit-border-radius 5px
     -moz-border-radius 5px
     border-radius 5px
+    @media (min-width:1366px)
+      min-width 570px
+      height 300px
+    @media (min-width:1024px) and (max-width:1366px)
+      min-width 400px
+      height 200px
 
     .lesson
       height 19.5%
       border-bottom 1px solid grey
+      @media (min-width:1366px)
+        width 90%
+        margin 0 5%
+      @media (min-width:1024px) and (max-width:1366px)
+        width 96%
+        margin 0 2%
 
     .lesson:last-child
       border-bottom 0
@@ -380,176 +460,66 @@
       width 20%
       font-weight 600
       text-align center
+      @media (min-width:1366px)
+        min-width 105px
+        padding-right 15px
+        font-size 1.25em
+        line-height 55px
+      @media (min-width:1024px) and (max-width:1366px)
+        min-width 80px
+        padding-right 10px
+        font-size 1.1em
+        line-height 35px
+
+    .lesson li:first-child
+      @media (min-width:1366px)
+        font-size 1.5em
+
+    .star
+      @media (min-width:1366px)
+        height 55px
+        padding-top 5px
+        line-height 55px
+      @media (min-width:1024px) and (max-width:1366px)
+        height 30px
+        padding-top 5px
+        line-height 30px
 
   .user-bottomright
     float left
     width 34%
-    height 300px
     margin-top 20px
     background white
     -webkit-border-radius 5px
     -moz-border-radius 5px
     border-radius 5px
+    @media (min-width:1366px)
+      height 300px
+    @media (min-width:1024px) and (max-width:1366px)
+      height 200px
 
     div
       clear both
       width 85%
       height 33%
       border-bottom 1px solid lightgrey
+      @media (min-width:1366px)
+        margin 0 7.5%
+        padding 20px 2px
+      @media (min-width:1024px) and (max-width:1366px)
+        margin 0 5%
+        padding 10px 2px
 
       h3
         margin-top 5px
         color grey
+        @media (min-width:1366px)
+          font-size 1.3em
+        @media (min-width:1024px) and (max-width:1366px)
+          font-size 1.3em
 
     div:last-child
       border-bottom 0
 
-  @media screen and (min-width: 1366px)
-  //user
-    .user
-      height 200px
 
-      .userinfo-head
-        width 100px
-        margin 36px
-
-      .userinfo
-        min-width 200px
-        margin 36px
-
-      .userinfo h3
-        font-size 1.5em
-
-      .userinfo h4
-        font-size 1.2em
-
-      .remark
-        min-width 300px
-
-      .remark h3
-        font-size 1.5em
-
-      .remark h4
-        font-size 1.2em
-
-  //user-mid
-    .user-mid div
-      height 200px
-
-      div
-        padding-top 35px
-
-    .user-mid h2
-      font-size 3em
-
-    .user-mid span
-      font-size 1.2em
-
-  //user-bottom
-    .user-bottomleft
-      min-width 570px
-      height 300px
-
-      .lesson
-        width 90%
-        margin 0 5%
-
-      .lesson li
-        min-width 105px
-        padding-right 15px
-        font-size 1.25em
-        line-height 55px
-
-      .lesson li:first-child
-        font-size 1.5em
-
-      .star
-        height 55px
-        padding-top 5px
-        line-height 55px
-
-    .user-bottomright
-      height 300px
-
-      h3
-        font-size 1.3em
-
-      div
-        margin 0 7.5%
-        padding 20px 2px
-
-  @media screen and (min-width: 1024px) and (max-width: 1366px)
-  //user
-    .user
-      height 150px
-
-      .userinfo-head
-        max-width 100px
-        min-width 90px
-        margin 25px 25px
-
-      .userinfo
-        min-width 150px
-        margin 36px 25px
-
-      .userinfo h3
-        font-size 1.3em
-
-      .userinfo h4
-        font-size 1.1em
-
-      .remark
-        min-width 200px
-
-      .remark h3
-        font-size 1.3em
-
-      .remark h4
-        font-size 1.1em
-
-  //user-mid
-    .user-mid div
-      height 150px
-
-      div
-        padding-top 20px
-
-    .user-mid h2
-      font-size 2em
-
-    .user-mid span
-      font-size 1.1em
-
-  //user-bottom
-    .user-bottomleft
-      min-width 400px
-      height 200px
-
-      .lesson
-        width 96%
-        margin 0 2%
-
-      .lesson li
-        min-width 80px
-        padding-right 10px
-        font-size 1.1em
-        line-height 35px
-
-      .lesson li:first-child
-        font-size 1.2em
-
-      .star
-        height 30px
-        padding-top 5px
-        line-height 30px
-
-    .user-bottomright
-      height 200px
-
-      h3
-        font-size 1.3em
-
-      div
-        margin 0 5%
-        padding 10px 2px
 </style>
