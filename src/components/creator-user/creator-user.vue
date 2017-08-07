@@ -3,7 +3,7 @@
     <div class="creation-info">
       <div>
         <div class="label">用户ID</div>
-        <Input ref="userId" placeholder="请输入..."/>
+        <Input ref="userId" @on-blur="_checkInput()" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label">账户</div>
@@ -42,7 +42,7 @@
       </div>
       <div class="remark">
         <div class="label">备注</div>
-        <Input ref="userNote" type="textarea" placeholder="请输入..." :row="5"/>
+        <Input ref="userNote" type="textarea" placeholder="请输入..." rows="5" class="textarea"/>
       </div>
       <Button type="primary" class="btn-create" @click="_createUser()">添加</Button>
     </div>
@@ -85,6 +85,14 @@
             this.$swal('添加成功!', '您已成功录入该会员数据！', 'success')
           }
         })
+      },
+      _checkInput(value) {
+        console.log(value)
+        if (value) {
+          console.log(value)
+        } else {
+          console.log('err')
+        }
       }
     },
 
@@ -107,22 +115,122 @@
     width 100%
     height 500px
     background: white
+    @media (min-width: 1024px) and (max-width: 1224px)
+      height 530px
 
     .creation-info
       width 68%
       padding 10px 20px
+      @media (min-width: 1524px)
+        min-width 745px
+      @media (min-width: 1224px) and (max-width: 1524px)
+        width 68%
+      @media (min-width: 1024px) and (max-width: 1224px)
+        width 500px
+
 
       div
         padding 2px 0
+        @media (min-width: 1524px)
+          height 50px
+          line-height 50px
+        @media (min-width: 1224px) and (max-width: 1524px)
+          height 50px
+          line-height 50px
+        @media (min-width: 1024px) and (max-width: 1224px)
+          height 40px
+          padding-top 2px
+          line-height 40px
 
         div
           float left
 
+        .label
+          @media (min-width: 1524px)
+            width 64px
+            margin 0 10px
+            font-size 1.3em
+          @media (min-width: 1224px) and (max-width: 1524px)
+            width 60px
+            margin 0 10px
+            font-size 1.2em
+          @media (min-width: 1024px) and (max-width: 1224px)
+            width 14%
+            margin 0 10px
+            font-size 1.2em
+
+        .label-inline
+          @media (min-width: 1524px)
+            margin-left 6%
+          @media (min-width: 1224px) and (max-width: 1524px)
+            margin-left 6%
+          @media (min-width: 1024px) and (max-width: 1224px)
+            margin-left 10px
+
+        .ivu-input-wrapper
+          @media (min-width: 1524px)
+            width 36.4%
+            min-width 271px
+          @media (min-width: 1224px) and (max-width: 1524px)
+            width 32%
+          @media (min-width: 1024px) and (max-width: 1224px)
+            width 80%
+
         .input-small
           width 50px
+          @media (min-width: 1524px)
+            min-width 50px
+          @media (min-width: 1224px) and (max-width: 1524px)
+            min-width 50px
+          @media (min-width: 1024px) and (max-width: 1224px)
+            min-width 50px
+            margin-right 4%
+
+        .radio
+          @media (min-width: 1524px)
+            font-size 1.2em
+            line-height 50px
+          @media (min-width: 1224px) and (max-width: 1524px)
+            font-size 1.2em
+            line-height 50px
+          @media (min-width: 1024px) and (max-width: 1224px)
+            font-size 1.2em
+            line-height 35px
 
         .ivu-radio-wrapper
           margin-right 25px
+
+        .ivu-radio-group
+          @media (min-width: 1024px) and (max-width: 1224px)
+            width 80%
+
+      .remark
+        @media (min-width: 1524px)
+          height 140px
+          padding-top 10px
+        @media (min-width: 1224px) and (max-width: 1524px)
+          height 140px
+          padding-top 10px
+        @media (min-width: 1024px) and (max-width: 1224px)
+          height 230px
+          padding-top 10px
+
+        div
+          @media (min-width: 1524px)
+            line-height 40px
+          @media (min-width: 1224px) and (max-width: 1524px)
+            line-height 40px
+          @media (min-width: 1024px) and (max-width: 1224px)
+            line-height 35px
+
+        .textarea
+          @media (min-width: 1524px)
+            width 88%
+            min-width 640px
+          @media (min-width: 1224px) and (max-width: 1524px)
+            width 80%
+          @media (min-width: 1024px) and (max-width: 1224px)
+            width 80%
 
       .btn-create
         width 50%
@@ -130,131 +238,11 @@
         margin-top 30px
         margin-left 25%
         font-size 1.2em
+        @media (min-width: 1524px)
+          min-width 340px
+        @media (min-width: 1224px) and (max-width: 1524px)
+          min-width 340px
+        @media (min-width: 1024px) and (max-width: 1224px)
+          width 50%
 
-  @media screen and (min-width: 1524px)
-
-    .creation-info
-      min-width 745px
-
-      div
-        height 50px
-        line-height 50px
-
-      .label
-        width 64px
-        margin 0 10px
-        font-size 1.3em
-
-      .label-inline
-        margin-left 6%
-
-      .ivu-input-wrapper
-        width 36.4%
-        min-width 271px
-
-      .input-small
-        min-width 50px
-
-      .radio
-        font-size 1.2em
-        line-height 50px
-
-    .remark
-      height 210px
-      padding-top 10px
-
-      div
-        line-height 40px
-
-      .ivu-input-wrapper
-        width 88%
-        min-width 640px
-
-    .btn-create
-      min-width 340px
-
-  @media screen and (min-width: 1224px) and (max-width: 1524px)
-
-    .creation-info
-      width 68%
-
-      div
-        height 50px
-        line-height 50px
-
-      .label
-        width 60px
-        margin 0 10px
-        font-size 1.2em
-
-      .label-inline
-        margin-left 6%
-
-      .ivu-input-wrapper
-        width 32%
-
-      .input-small
-        min-width 50px
-
-      .radio
-        font-size 1.2em
-        line-height 50px
-
-    .remark
-      height 210px
-      padding-top 10px
-
-      div
-        line-height 40px
-
-      .ivu-input-wrapper
-        width 80%
-
-    .btn-create
-      min-width 340px
-
-  @media screen and (min-width: 1024px) and (max-width: 1224px)
-
-    .creation-info
-      width 500px
-
-      div
-        height 40px
-        padding-top 2px
-        line-height 40px
-
-        .label
-          width 14%
-          margin 0 10px
-          font-size 1.2em
-
-        .label-inline
-          margin-left 10px
-
-        .ivu-input-wrapper
-          width 80%
-
-        .input-small
-          min-width 50px
-          margin-right 4%
-
-        .radio
-          font-size 1.2em
-          line-height 35px
-
-        .ivu-radio-group
-          width 80%
-
-      .remark
-        height 140px
-        padding-top 10px
-
-        div
-          line-height 35px
-
-        .ivu-input-wrapper
-          width 80%
-
-      .btn-create
-        width 50%
 </style>
