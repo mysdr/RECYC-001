@@ -2,6 +2,10 @@
   <div class="creation">
     <div class="creation-info">
       <div>
+        <div class="label">课程ID</div>
+        <Input ref="courseId" v-model="courseId" placeholder="请输入..."/>
+      </div>
+      <div>
         <div class="label">课程名称</div>
         <Input ref="courseName" v-model="courseName" placeholder="请输入..."/>
       </div>
@@ -20,17 +24,6 @@
         <div class="label label-inline">课程容量</div>
         <Input type="number" ref="courseCapacity" v-model="courseCapacity" placeholder="请输入..." class="input-small"/>
       </div>
-      <div>
-        <div class="label">开放时间</div>
-        <Row>
-          <Col span="12">
-          <Date-picker type="date" placeholder="选择日期"></Date-picker>
-          </Col>
-          <Col span="12">
-          <Date-picker type="daterange" placement="bottom-end" placeholder="选择日期"></Date-picker>
-          </Col>
-        </Row>
-      </div>
       <div class="remark">
         <div class="label">课程简介</div>
         <Input ref="userNote" v-model="courseContent" type="textarea" placeholder="请输入..." rows="5" class="textarea"/>
@@ -47,6 +40,7 @@
   export default {
     data() {
       return {
+        courseId: '',
         courseName: '',
         courseTeacher: '',
         courseCapacity: '',

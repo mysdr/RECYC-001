@@ -9,6 +9,7 @@
           <img src="./default.jpg" class="course-img">
           <h3>{{course.course_name}}</h3>
           <h4>导师：{{course.course_teacher}}</h4>
+          <div>课程Id:{{course.course_id}}</div>
           <div>容量：{{course.course_capacity}}</div>
           <div>注册时间：{{course.course_register}}</div>
         </div>
@@ -98,7 +99,7 @@
     margin-bottom 20px
 
     .course-info
-      height 200px
+      height 220px
       text-align center
 
       h3
