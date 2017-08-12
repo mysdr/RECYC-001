@@ -3,7 +3,7 @@
     <div class="creation-info">
       <div>
         <div class="label">课程名称</div>
-        <Input ref="courseName" v-model="courseName"  placeholder="请输入..."/>
+        <Input ref="courseName" v-model="courseName" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label">导师</div>
@@ -18,7 +18,7 @@
       </div>
       <div>
         <div class="label label-inline">课程容量</div>
-        <Input type="number" ref="courseCapacity" v-model="courseCapacity"  placeholder="请输入..." class="input-small"/>
+        <Input type="number" ref="courseCapacity" v-model="courseCapacity" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">开放时间</div>
@@ -33,16 +33,18 @@
       </div>
       <div class="remark">
         <div class="label">课程简介</div>
-        <Input ref="userNote"  v-model="courseContent" type="textarea" placeholder="请输入..." rows="5" class="textarea"/>
+        <Input ref="userNote" v-model="courseContent" type="textarea" placeholder="请输入..." rows="5" class="textarea"/>
       </div>
-      <Button type="primary" class="btn-create" @click="_createUser()">添加</Button>
+      <Button type="primary" class="btn-create" @click="_createCourse()">添加</Button>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import { mapGetters } from 'vuex'
+  import { create } from 'api/course'
+
   export default {
-    // 使用v-model进行双向绑定获得值，即可进行选择
     data() {
       return {
         courseName: '',
@@ -70,6 +72,33 @@
           }
         ]
       }
+    },
+    computed: {
+      ...mapGetters([
+        'token',
+        'uid',
+        'timestamp'
+      ])
+    },
+    methods: {
+      _createCourse () {
+        let params = {
+          uid: this.uid,
+          token: this.token,
+          timestamp: this.timestamp,
+          course_id: 'id',
+          course_name: this.$refs.courseName.value,
+          course_content: this.$refs.courseContent.value,
+          course_teacher: this.$refs.courseTeacher.value,
+          course_capacity: this.$refs.courseCapacity.value,
+          course_register: +new Date()
+        }
+        create(params).then(res => {
+          if (res.code === 0) {
+            this.$swal('添加成功!', '您已成功录入该会员数据！', 'success')
+          }
+        })
+      }
     }
   }
 </script>
@@ -96,7 +125,6 @@
         width 68%
       @media (min-width: 1024px) and (max-width: 1224px)
         width 500px
-
 
       div
         padding 2px 0

@@ -7,3 +7,7 @@ export const uid = state => state.uid
 export const userList = state => state.userList
 
 export const user = state => state.user
+
+export const courseList = state => state.courseList
+
+export const course = state => state.course

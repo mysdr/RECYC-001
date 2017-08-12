@@ -1,33 +1,19 @@
 <template>
   <div>
-    <div class="editor" >
+    <div class="editor">
       <Icon type="android-add-circle" class="add"></Icon>
     </div>
-    <div class="course-card">
+    <div class="course-card" v-for="course in courseList" @click="selectCourse(course)">
       <Card>
         <div class="course-info">
           <img src="./default.jpg" class="course-img">
-          <h3>健身课程001</h3>
-          <h4>邓国雄</h4>
-          <div>课程容量：一周</div>
-          <div>课程注册时间：2017.06.08</div>
+          <h3>{{course.course_name}}</h3>
+          <h4>导师：{{course.course_teacher}}</h4>
+          <div>容量：{{course.course_capacity}}</div>
+          <div>注册时间：{{course.course_register}}</div>
         </div>
         <div class="course-content">
-          课程简介
-        </div>
-      </Card>
-    </div>
-    <div class="course-card">
-      <Card>
-        <div class="course-info">
-          <img src="./default.jpg" class="course-img">
-          <h3>健身课程001</h3>
-          <h4>邓国雄</h4>
-          <div>课程容量：一周</div>
-          <div>课程注册时间：2017.06.08</div>
-        </div>
-        <div class="course-content">
-          课程简介
+          {{course.course_content}}
         </div>
       </Card>
     </div>
@@ -35,7 +21,49 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {}
+  import { mapGetters, mapMutations } from 'vuex'
+  import { list } from 'api/course'
+
+  export default {
+    created() {
+      this._showList()
+    },
+    mounted() {
+      this._showList()
+    },
+    computed: {
+      ...mapGetters([
+        'token',
+        'timestamp',
+        'uid',
+        'courseList'
+      ])
+    },
+    methods: {
+      _showList() {
+        let params = {
+          uid: this.uid,
+          timestamp: this.timestamp,
+          token: this.token
+        }
+        list(params).then(res => {
+          if (res.code === 0) {
+            this.setCourseList(res.courses)
+          }
+        })
+      },
+      selectCourse(course) {
+        this.$router.push({
+          path: `/course/${course.id}`
+        })
+        this.setCourse(course)
+      },
+      ...mapMutations({
+        setCourseList: 'SET_COURSE_LIST',
+        setCourse: 'SET_COURSE'
+      })
+    }
+  }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
@@ -61,7 +89,7 @@
       color blue
 
     .add:hover
-      color rgba(45,140,240,0.7)
+      color rgba(45, 140, 240, 0.7)
 
   .course-card
     float left
