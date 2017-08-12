@@ -22,11 +22,11 @@
       </div>
       <div>
         <div class="label label-inline">课程容量</div>
-        <Input type="number" ref="courseCapacity" v-model="courseCapacity" placeholder="请输入..." class="input-small"/>
+        <Input ref="courseCapacity" v-model="courseCapacity" placeholder="请输入..." class="input-small"/>
       </div>
       <div class="remark">
         <div class="label">课程简介</div>
-        <Input ref="userNote" v-model="courseContent" type="textarea" placeholder="请输入..." rows="5" class="textarea"/>
+        <Input ref="userNote" v-model="courseContent" type="textarea" placeholder="请输入..." class="textarea"/>
       </div>
       <Button type="primary" class="btn-create" @click="_createCourse()">添加</Button>
     </div>
@@ -80,13 +80,14 @@
           uid: this.uid,
           token: this.token,
           timestamp: this.timestamp,
-          course_id: 'id',
-          course_name: this.$refs.courseName.value,
-          course_content: this.$refs.courseContent.value,
-          course_teacher: this.$refs.courseTeacher.value,
-          course_capacity: this.$refs.courseCapacity.value,
+          course_id: this.courseId,
+          course_name: this.courseName,
+          course_content: this.courseContent,
+          course_teacher: this.courseTeacher,
+          course_capacity: this.courseCapacity,
           course_register: +new Date()
         }
+        console.log(params)
         create(params).then(res => {
           if (res.code === 0) {
             this.$swal('添加成功!', '您已成功录入该会员数据！', 'success')

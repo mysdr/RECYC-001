@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="editor">
+    <div class="editor" @click="_selectAdd()">
       <Icon type="android-add-circle" class="add"></Icon>
     </div>
     <div class="course-card" v-for="course in courseList" @click="selectCourse(course)">
@@ -41,6 +41,11 @@
       ])
     },
     methods: {
+      _selectAdd() {
+        this.$router.push({
+          path: '/course/creator'
+        })
+      },
       _showList() {
         let params = {
           uid: this.uid,
@@ -48,6 +53,7 @@
           token: this.token
         }
         list(params).then(res => {
+          console.log(res)
           if (res.code === 0) {
             this.setCourseList(res.courses)
           }
