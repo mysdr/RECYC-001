@@ -11,14 +11,7 @@
       </div>
       <div>
         <div class="label">导师</div>
-        <Select v-model="courseTeacher" class="ivu-input-wrapper selection">
-          <Option-group label="男性导师">
-            <Option v-for="item in male" :value="item.value" :key="item.value">{{ item.label }}</Option>
-          </Option-group>
-          <Option-group label="女性导师">
-            <Option v-for="item in female" :value="item.value" :key="item.value">{{ item.label }}</Option>
-          </Option-group>
-        </Select>
+        <Input ref="courseId" v-model="courseTeacher" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label label-inline">课程容量</div>
@@ -44,27 +37,7 @@
         courseName: '',
         courseTeacher: '',
         courseCapacity: '',
-        courseContent: '',
-        male: [
-          {
-            value: 'airing',
-            label: '邓国雄'
-          },
-          {
-            value: 'LZH',
-            label: '梁志豪'
-          }
-        ],
-        female: [
-          {
-            value: 'airing-female',
-            label: '邓国雄'
-          },
-          {
-            value: 'LZH-female',
-            label: '梁志豪'
-          }
-        ]
+        courseContent: ''
       }
     },
     computed: {
