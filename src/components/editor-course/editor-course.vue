@@ -1,16 +1,17 @@
 <template>
   <div>
     <div class="editor">
-      <span class="add" ></span>
-      <span class="delete" ></span>
-      <span class="edit" ></span>
+      <span class="add" @click="_selectAdd()"></span>
+      <span class="delete" @click="_selectDelete()"></span>
+      <span class="edit" @click="_selectEdit()"></span>
     </div>
     <div class="course-info">
       <img src="./default.jpg">
       <div>
-        <h2>健身课程001</h2>
-        <h3>课程容量：1人</h3>
-        <h3>课程创建时间：2017.08.08</h3>
+        <h2 ref="courseNameField" @click="_edit('course_name')">{{course.course_name}}</h2>
+        <h3 ref="courseIdField" @click="_edit('course_id')">ID：{{course.course_id}}</h3>
+        <h3 ref="courseCapacityField" @click="_edit('course_capacity')">容量：{{course.course_capacity}} 人</h3>
+        <h3>注册时间：{{_toDate(course.course_register)}}</h3>
       </div>
     </div>
     <div class="course-bottom">
@@ -18,17 +19,17 @@
         <img src="../../common/image/default.png">
         <div>
           <h2>
-            导师：邓国雄
+            <span ref="courseTeacherField" @click="_edit('course_teacher')">导师：{{course.course_teacher}}</span>
             <icon type="female" class="female"></icon>
           </h2>
           <h3>微信：airing</h3>
-          <h3>联系方式：110</h3>
+          <h3>联系方式：13188888888</h3>
         </div>
       </div>
       <div class="course-content">
         <h2>课程简介</h2>
-        <div>
-          课程简介……
+        <div ref="courseContentField" @click="_edit('course_content')">
+          {{course.course_content}}
         </div>
       </div>
     </div>
@@ -37,12 +38,109 @@
 
 <script>
   import Star from 'base/star/star'
+  import { mapGetters, mapMutations } from 'vuex'
+  import { remove, edit } from 'api/course'
 
   export default {
     data () {
       return {
         mode: 0
       }
+    },
+    computed: {
+      ...mapGetters([
+        'token',
+        'uid',
+        'timestamp',
+        'course'
+      ])
+    },
+    methods: {
+      _toDate(ts) {
+        let date = new Date(ts)
+        return date.getYear() + 1900 + '年' + date.getMonth() + '月' + date.getDate() + '日'
+      },
+      _selectAdd() {
+        this.$router.push({
+          path: '/course/creator'
+        })
+      },
+      _selectDelete() {
+        let params = {
+          uid: this.uid,
+          token: this.token,
+          timestamp: this.timestamp
+        }
+        this.$swal({
+          title: '是否确定',
+          text: '您将删除该课程，该操作不可逆!',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#DD6B55',
+          confirmButtonText: '删除',
+          cancelButtonText: '取消',
+          closeOnConfirm: false,
+          closeOnCancel: false
+        }, function (isConfirm) {
+          if (isConfirm) {
+            remove(params, this.course.id).then(res => {
+              if (res.code === 0) {
+                this.$swal('删除成功!', '您已成功删除该课程数据！', 'success')
+                this.$router.push({
+                  path: '/'
+                })
+              }
+            })
+          }
+        })
+      },
+      _selectEdit() {
+        if (this.mode === 0) {
+          this.$swal('编辑模式！', '您已进入编辑模式，点击蓝色元素可以修改用户数据，再次点击编辑按钮可以退出编辑模式。', 'success')
+          this.mode = 1
+          this.$refs.courseNameField.style.color = '#0F88EB'
+          this.$refs.courseIdField.style.color = '#0F88EB'
+          this.$refs.courseContentField.style.color = '#0F88EB'
+          this.$refs.courseTeacherField.style.color = '#0F88EB'
+          this.$refs.courseCapacityField.style.color = '#0F88EB'
+        } else {
+          this.$swal('退出编辑模式！', '您已退出编辑模式，再次点击编辑按钮可以进入编辑模式。', 'success')
+          this.$refs.courseNameField.style.color = 'black'
+          this.$refs.courseIdField.style.color = 'black'
+          this.$refs.courseContentField.style.color = 'black'
+          this.$refs.courseTeacherField.style.color = 'black'
+          this.$refs.courseCapacityField.style.color = 'black'
+          this.mode = 0
+        }
+      },
+      _edit(field) {
+        if (this.mode === 1) {
+          this.$swal({
+            title: '请输入更新的数据内容',
+            input: 'text',
+            showCancelButton: true,
+            confirmButtonText: '确定',
+            showLoaderOnConfirm: true,
+            allowOutsideClick: false
+          }).then(text => {
+            let params = {
+              uid: this.uid,
+              token: this.token,
+              timestamp: this.timestamp,
+              field: text
+            }
+            edit(params, this.course.id, field).then(res => {
+              console.log(res)
+              if (res.code === 0) {
+                this.setCourse(res.course)
+              }
+            })
+          })
+        }
+      },
+      ...mapMutations({
+        setCourse: 'SET_COURSE'
+      })
     },
     components: {
       Star
@@ -110,7 +208,6 @@
       float left
       width 246px
       margin 40px 20px
-
 
     div
       float left
