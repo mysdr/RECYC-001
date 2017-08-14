@@ -9,9 +9,9 @@
           <img src="./default.jpg" class="course-img">
           <h3>{{course.course_name}}</h3>
           <h4>导师：{{course.course_teacher}}</h4>
-          <div>课程Id:{{course.course_id}}</div>
-          <div>容量：{{course.course_capacity}}</div>
-          <div>注册时间：{{course.course_register}}</div>
+          <div>课程ID：{{course.course_id}}</div>
+          <div>容量：{{course.course_capacity}} 人</div>
+          <div>注册时间：{{_toDate(course.course_register)}}</div>
         </div>
         <div class="course-content">
           {{course.course_content}}
@@ -41,6 +41,10 @@
       ])
     },
     methods: {
+      _toDate(ts) {
+        let date = new Date(ts)
+        return date.getYear() + 1900 + '年' + date.getMonth() + '月' + date.getDate() + '日'
+      },
       _selectAdd() {
         this.$router.push({
           path: '/course/creator'
@@ -53,7 +57,6 @@
           token: this.token
         }
         list(params).then(res => {
-          console.log(res)
           if (res.code === 0) {
             this.setCourseList(res.courses)
           }

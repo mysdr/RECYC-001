@@ -205,17 +205,17 @@
         if (this.mode === 1) {
           this.$swal({
             title: '请输入更新的数据内容',
-            input: 'value',
+            input: 'text',
             showCancelButton: true,
             confirmButtonText: '确定',
             showLoaderOnConfirm: true,
             allowOutsideClick: false
-          }).then(function (value) {
+          }).then(text => {
             let params = {
               uid: this.uid,
               token: this.token,
               timestamp: this.timestamp,
-              field: value
+              field: text
             }
             edit(params, this.user.id, field).then(res => {
               if (res.code === 0) {

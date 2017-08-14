@@ -17,11 +17,11 @@ export function create(params) {
 }
 
 export function remove(params, id) {
-  const url = HOST + `/v1/users/courses/${id}`
+  const url = HOST + `/v1/courses/edit/${id}`
   return jsonp(url, params)
 }
 
 export function edit(params, id, field) {
-  const url = HOST + `/v1/users/courses/${field}/${id}`
+  const url = HOST + `/v1/courses/edit/${field}/${id}`
   return jsonp(url, params)
 }
