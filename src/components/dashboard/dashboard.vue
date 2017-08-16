@@ -10,12 +10,24 @@
               <span class="layout-text">用户管理</span>
             </div>
           </Menu-item>
-          <Menu-item name="2">
-            <div @click="_selectCourse()">
+          <Submenu name="2">
+            <template slot="title">
               <Icon type="ios-keypad" :size="iconSize"></Icon>
-              <span class="layout-text">课程管理</span>
-            </div>
-          </Menu-item>
+              课程管理
+            </template>
+            <Menu-item name="2-1">
+              <div @click="_selectCourse()">
+                <Icon type="ios-keypad" :size="iconSize"></Icon>
+                <span class="layout-text">课程列表</span>
+              </div>
+            </Menu-item>
+            <Menu-item name="2-2">
+              <div>
+                <Icon type="ios-calendar" :size="iconSize"></Icon>
+                <span class="layout-text">约课</span>
+              </div>
+            </Menu-item>
+          </Submenu>
           <Menu-item name="3">
             <div @click="_selectBike()">
               <Icon type="ios-analytics" :size="iconSize"></Icon>
@@ -151,6 +163,9 @@
   .layout-ceiling-main a
     color #9ba7b5
 
+  .ivu-icon
+    margin-right 8px
+
   .layout-hide-text .layout-text
     display none
 
@@ -162,5 +177,9 @@
     right 10px
     top 16px
     color red
+
+  .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):hover, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu):hover
+    color white
+    background #2d8cf0
 
 </style>

@@ -68,7 +68,7 @@
     margin-right 15px
 
     h2
-      font-size 1.7em
+      font-size 1.3em
 
     .bike-used
       float right
@@ -83,6 +83,6 @@
 
     h3
       margin-top 1px
-      font-size 1.1em
+      font-size 0.9em
 
 </style>
