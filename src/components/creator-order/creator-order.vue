@@ -6,68 +6,28 @@
         <Input ref="courseId" v-model="courseId" placeholder="请输入..."/>
       </div>
       <div>
-        <div class="label">课程名称</div>
-        <Input ref="courseName" v-model="courseName" placeholder="请输入..."/>
+        <div class="label">约课ID</div>
+        <Input ref="courseName" v-model="ordereName" placeholder="请输入..."/>
       </div>
       <div>
-        <div class="label">导师</div>
-        <Input ref="courseId" v-model="courseTeacher" placeholder="请输入..."/>
+        <div class="label label-inline">约课容量</div>
+        <Input type="number" class="input-small" ref="courseCapacity" v-model="orderCapacity" placeholder="请输入..." />
       </div>
       <div>
-        <div class="label label-inline">课程容量</div>
-        <Input type="number" ref="courseCapacity" v-model="courseCapacity" placeholder="请输入..." class="input-small"/>
+        <div class="label">约课时间段</div>
+        <Row class="datepicker">
+          <Col span="24">
+          <Date-picker type="daterange"  placeholder="选择时间"></Date-picker>
+          </Col>
+        </Row>
       </div>
-      <div class="remark">
-        <div class="label">课程简介</div>
-        <Input ref="userNote" v-model="courseContent" type="textarea" placeholder="请输入..." class="textarea"/>
-      </div>
-      <Button type="primary" class="btn-create" @click="_createCourse()">添加</Button>
+      <Button type="primary" class="btn-create">添加</Button>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import { mapGetters } from 'vuex'
-  import { create } from 'api/course'
-
   export default {
-    data() {
-      return {
-        courseId: '',
-        courseName: '',
-        courseTeacher: '',
-        courseCapacity: '',
-        courseContent: ''
-      }
-    },
-    computed: {
-      ...mapGetters([
-        'token',
-        'uid',
-        'timestamp'
-      ])
-    },
-    methods: {
-      _createCourse () {
-        let params = {
-          uid: this.uid,
-          token: this.token,
-          timestamp: this.timestamp,
-          course_id: this.courseId,
-          course_name: this.courseName,
-          course_content: this.courseContent,
-          course_teacher: this.courseTeacher,
-          course_capacity: this.courseCapacity,
-          course_register: +new Date()
-        }
-        console.log(params)
-        create(params).then(res => {
-          if (res.code === 0) {
-            this.$swal('添加成功!', '您已成功录入该课程数据！', 'success')
-          }
-        })
-      }
-    }
   }
 </script>
 
@@ -79,8 +39,10 @@
 
   .creation
     width 100%
-    height 420px
+    height 320px
     background: white
+    @media (min-width: 1024px) and (max-width: 1224px)
+      height 530px
 
     .creation-info
       width 68%
@@ -110,11 +72,11 @@
 
         .label
           @media (min-width: 1524px)
-            width 64px
+            width 85px
             margin 0 10px
             font-size 1.3em
           @media (min-width: 1224px) and (max-width: 1524px)
-            width 60px
+            width 80px
             margin 0 10px
             font-size 1.2em
           @media (min-width: 1024px) and (max-width: 1224px)
@@ -125,8 +87,8 @@
         .selection
           padding-top 9px
 
-        .timepicker
-          width 100%
+        .datepicker
+          width 36%
           padding 0
 
         .ivu-col, .timepicker, .ivu-date-picker
@@ -171,32 +133,6 @@
           margin-right 25px
 
         .ivu-radio-group
-          @media (min-width: 1024px) and (max-width: 1224px)
-            width 80%
-
-      .remark
-        height 100px
-        @media (min-width: 1524px)
-          padding-top 10px
-        @media (min-width: 1224px) and (max-width: 1524px)
-          padding-top 10px
-        @media (min-width: 1024px) and (max-width: 1224px)
-          padding-top 10px
-
-        div
-          @media (min-width: 1524px)
-            line-height 40px
-          @media (min-width: 1224px) and (max-width: 1524px)
-            line-height 40px
-          @media (min-width: 1024px) and (max-width: 1224px)
-            line-height 35px
-
-        .textarea
-          @media (min-width: 1524px)
-            width 88%
-            min-width 640px
-          @media (min-width: 1224px) and (max-width: 1524px)
-            width 80%
           @media (min-width: 1024px) and (max-width: 1224px)
             width 80%
 
