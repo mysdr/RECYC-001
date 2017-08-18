@@ -11,3 +11,11 @@ export const user = state => state.user
 export const courseList = state => state.courseList
 
 export const course = state => state.course
+
+export const bikeList = state => state.bikeList
+
+export const bike = state => state.bike
+
+export const datingList = state => state.datingList
+
+export const dating = state => state.dating

@@ -7,7 +7,11 @@ const state = {
   userList: [],
   user: {},
   courseList: [],
-  course: {}
+  course: {},
+  bikeList: [],
+  bike: {},
+  datingList: [],
+  dating: {}
 }
 
 export default state

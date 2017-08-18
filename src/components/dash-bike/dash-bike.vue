@@ -3,54 +3,68 @@
     <div class="editor" @click="_selectAdd()">
       <Icon type="android-add-circle" class="add"></Icon>
     </div>
-    <div class="bike-card">
+    <div class="bike-card" v-for="bike in bikeList" @click="_selectBike(bike)">
       <Card>
         <h2>
-          ID:001
+          <span>ID：{{bike.bike_id}}</span>
           <span class="bike-used unused">
-            未使用
+            {{bike.bike_used ? 正在使用 : 未使用}}
           </span>
         </h2>
-        <h3>动感单车</h3>
-        <h3>位置：H03</h3>
-        <h3>注册时间：2017.02.25</h3>
-        <h3>最后维护时间：2017.03.08</h3>
-      </Card>
-    </div>
-    <div class="bike-card">
-      <Card>
-        <h2>
-          ID:002
-          <span class="bike-used using">
-            使用中
-          </span>
-        </h2>
-        <h3>动感单车</h3>
-        <h3>位置：H01</h3>
-        <h3>注册时间：2017.02.25</h3>
-        <h3>最后维护时间：2017.03.08</h3>
+        <h3>{{bike.bike_type}}</h3>
+        <h3>位置：{{bike.bike_position}}</h3>
+        <h3>注册时间：{{_toDate(bike.bike_register)}}</h3>
+        <h3>最后维护时间：{{_toDate(bike.bike_update)}}</h3>
       </Card>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
+  import { list } from 'api/bike'
 
   export default {
     computed: {
       ...mapGetters([
         'token',
         'uid',
-        'timestamp'
+        'timestamp',
+        'bikeList'
       ])
     },
     methods: {
+      _toDate(ts) {
+        let date = new Date(ts)
+        return date.getYear() + 1900 + '年' + date.getMonth() + '月' + date.getDate() + '日'
+      },
+      _showList() {
+        let params = {
+          uid: this.uid,
+          timestamp: this.timestamp,
+          token: this.token
+        }
+        list(params).then(res => {
+          if (res.code === 0) {
+            this.setBikeList(res.bikes)
+          }
+        })
+      },
       _selectAdd() {
         this.$router.push({
           path: '/bike/creator'
         })
-      }
+      },
+      _selectBike(bike) {
+        this.$router.push({
+          path: `/bike/${bike.id}`
+        })
+        this.setBike(bike)
+      },
+      ...mapMutations({
+        setBikeList: 'SET_BIKE_LIST',
+        setBike: 'SET_BIKE'
+      })
     }
   }
 </script>
@@ -76,7 +90,7 @@
       color blue
 
     .add:hover
-      color rgba(45,140,240,0.7)
+      color rgba(45, 140, 240, 0.7)
 
   .bike-card
     float left

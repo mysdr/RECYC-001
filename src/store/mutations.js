@@ -21,6 +21,18 @@ const mutations = {
   },
   [types.SET_COURSE](state, course) {
     state.course = course
+  },
+  [types.SET_BIKE_LIST](state, bikes) {
+    state.bikeList = bikes
+  },
+  [types.SET_BIKE](state, bike) {
+    state.bike = bike
+  },
+  [types.SET_DATING_LIST](state, datings) {
+    state.datingList = datings
+  },
+  [types.SET_DATING](state, dating) {
+    state.dating = bike
   }
 }
 

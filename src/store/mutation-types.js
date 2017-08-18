@@ -11,3 +11,11 @@ export const SET_USER = 'SET_USER'
 export const SET_COURSE_LIST = 'SET_COURSE_LIST'
 
 export const SET_COURSE = 'SET_COURSE'
+
+export const SET_BIKE_LIST = 'SET_BIKE_LIST'
+
+export const SET_BIKE = 'SET_BIKE'
+
+export const SET_DATING_LIST = 'SET_DATING_LIST'
+
+export const SET_DATING = 'SET_DATING'
