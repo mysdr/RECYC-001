@@ -61,6 +61,24 @@ const CreatorBike = (resolve) => {
   })
 }
 
+const DashOrder = (resolve) => {
+  import('components/dash-order/dash-order').then((module) => {
+    resolve(module)
+  })
+}
+
+const EditorOrder = (resolve) => {
+  import('components/editor-order/editor-order').then((module) => {
+    resolve(module)
+  })
+}
+
+const CreatorOrder = (resolve) => {
+  import('components/creator-order/creator-order').then((module) => {
+    resolve(module)
+  })
+}
+
 const Login = (resolve) => {
   import('components/login/login').then((module) => {
     resolve(module)
@@ -122,6 +140,24 @@ export default new Router({
         {
           path: ':id',
           component: EditorCourse
+        }
+      ]
+    },
+    {
+      path: '/order',
+      component: Dashboard,
+      children: [
+        {
+          path: '/',
+          component: DashOrder
+        },
+        {
+          path: 'creator',
+          component: CreatorOrder
+        },
+        {
+          path: ':id',
+          component: EditorOrder
         }
       ]
     },

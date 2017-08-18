@@ -3,7 +3,7 @@
     <div class="creation-info">
       <div>
         <div class="label">车辆ID</div>
-        <Input ref="bikeId" v-model="bikeId"  placeholder="请输入..."/>
+        <Input ref="bikeId" v-model="bikeId" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label">车辆类型</div>
@@ -13,18 +13,17 @@
       </div>
       <div>
         <div class="label">车辆位置</div>
-        <Input ref="bikeLocation"  v-model="bikeLocation" placeholder="请输入..."/>
+        <Input ref="bikeLocation" v-model="bikeLocation" placeholder="请输入..."/>
       </div>
-      <Button type="primary" class="btn-create" @click="_createUser()">添加</Button>
+      <Button type="primary" class="btn-create" @click="_createBike()">添加</Button>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-
+  import { mapGetters } from 'vuex'
+  import { create } from 'api/bike'
   export default {
-
-    // 使用v-model进行双向绑定获得值，即可进行选择
     data() {
       return {
         bikeId: '',
@@ -36,6 +35,33 @@
           }
         ],
         bikeLocation: ''
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'token',
+        'uid',
+        'timestamp'
+      ])
+    },
+    methods: {
+      _createBike() {
+        let params = {
+          uid: this.uid,
+          timestamp: this.timestamp,
+          token: this.token,
+          bike_id: this.bikeId,
+          bike_type: this.bikeType,
+          bike_location: this.bikeLocation,
+          bike_used: false,
+          bike_update: +new Date(),
+          bike_register: +new Date()
+        }
+        create(params).then(res => {
+          if (res.code === 0) {
+            this.$swal('添加成功!', '您已成功录入该车辆数据！', 'success')
+          }
+        })
       }
     }
   }
@@ -63,7 +89,6 @@
         width 68%
       @media (min-width: 1024px) and (max-width: 1224px)
         width 500px
-
 
       div
         padding 2px 0

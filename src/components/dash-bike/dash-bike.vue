@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="editor">
+    <div class="editor" @click="_selectAdd()">
       <Icon type="android-add-circle" class="add"></Icon>
     </div>
     <div class="bike-card">
@@ -35,7 +35,24 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {}
+  import { mapGetters } from 'vuex'
+
+  export default {
+    computed: {
+      ...mapGetters([
+        'token',
+        'uid',
+        'timestamp'
+      ])
+    },
+    methods: {
+      _selectAdd() {
+        this.$router.push({
+          path: '/bike/creator'
+        })
+      }
+    }
+  }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">

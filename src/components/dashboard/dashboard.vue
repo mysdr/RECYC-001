@@ -22,7 +22,7 @@
               </div>
             </Menu-item>
             <Menu-item name="2-2">
-              <div>
+              <div @click="_selectOrder()">
                 <Icon type="ios-calendar" :size="iconSize"></Icon>
                 <span class="layout-text">约课</span>
               </div>
@@ -94,6 +94,11 @@
       _selectBike() {
         this.$router.push({
           path: '/bike'
+        })
+      },
+      _selectOrder() {
+        this.$router.push({
+          path: '/order'
         })
       }
     },
