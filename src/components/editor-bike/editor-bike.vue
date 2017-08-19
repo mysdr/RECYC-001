@@ -1,13 +1,20 @@
 <template>
   <div>
     <div class="editor">
+<<<<<<< HEAD
       <span class="add"  @click="_selectAdd"></span>
       <span class="delete" @click="_selectDelete"></span>
       <span class="edit" @click="_selectEdit"></span>
+=======
+      <span class="add"></span>
+      <span class="delete"></span>
+      <span class="edit"></span>
+>>>>>>> bcd48e92214b67a9db399c6b8f42f3a88ba43306
     </div>
     <div class="bike-info">
       <div>
         <h2>
+<<<<<<< HEAD
           <span ref="bikeIdField" @click="_edit('bike_id')">ID：{{bike.bike_id}}</span>
           <span class="bike-used unused">
             {{bike.bike_used ? 正在使用 : 未使用}}
@@ -17,6 +24,17 @@
         <h3 ref="bikePositionField" @click="_edit('bike_position')">位置：{{bike.bike_position}}</h3>
         <h3>注册时间：{{_toDate(bike.bike_register)}}</h3>
         <h3>最后维护时间：{{_toDate(bike.bike_update)}}</h3>
+=======
+          ID:001
+          <span class="bike-used unused">
+            未使用
+          </span>
+        </h2>
+        <h3>动感单车</h3>
+        <h3>位置：H03</h3>
+        <h3>注册时间：2017.02.25</h3>
+        <h3>最后维护时间：2017.08.08</h3>
+>>>>>>> bcd48e92214b67a9db399c6b8f42f3a88ba43306
       </div>
     </div>
 
@@ -24,6 +42,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
   import { mapGetters, mapMutations } from 'vuex'
   import { remove, edit } from 'api/bike'
 
@@ -118,6 +137,13 @@
       ...mapMutations({
         setBike: 'SET_BIKE'
       })
+=======
+
+  export default {
+    data () {
+      return {
+      }
+>>>>>>> bcd48e92214b67a9db399c6b8f42f3a88ba43306
     }
   }
 </script>
