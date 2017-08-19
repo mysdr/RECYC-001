@@ -10,16 +10,17 @@
         <h2>
           <span ref="bikeIdField" @click="_edit('bike_id')">ID：{{bike.bike_id}}</span>
           <span class="bike-used unused">
-            {{bike.bike_used ? 正在使用 : 未使用}}
+            {{bike.bike_used ? '正在使用' : '未使用'}}
           </span>
         </h2>
         <h3 ref="bikeTypeField" @click="_edit('bike_type')">{{bike.bike_type}}</h3>
         <h3 ref="bikePositionField" @click="_edit('bike_position')">位置：{{bike.bike_position}}</h3>
         <h3>注册时间：{{_toDate(bike.bike_register)}}</h3>
         <h3>最后维护时间：{{_toDate(bike.bike_update)}}</h3>
+        <Button type="primary" >维护车辆</Button>
+        <Button type="success" @click="_successbtn">{{this.successbtn ? '使用车辆' : '归还车辆'}}</Button>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -27,6 +28,11 @@
   import { mapGetters, mapMutations } from 'vuex'
   import { remove, edit } from 'api/bike'
   export default {
+    data() {
+      return {
+        successbtn: true
+      }
+    },
     computed: {
       ...mapGetters([
         'token',
@@ -114,6 +120,9 @@
           })
         }
       },
+      _successbtn() {
+        this.successbtn = !this.successbtn
+      },
       ...mapMutations({
         setBike: 'SET_BIKE'
       })
@@ -175,7 +184,7 @@
 
   .bike-info
     width 100%
-    height 170px
+    height 190px
     margin-top 50px
 
     div
@@ -205,4 +214,11 @@
     h3
       margin-top 1px
       font-size 1.4em
+
+    .ivu-btn
+      margin-top 10px
+
+    .ivu-btn:last-child
+      margin-left 10px
+
 </style>
