@@ -7,8 +7,11 @@
       <Card>
         <h2>
           <span>ID：{{bike.bike_id}}</span>
-          <span class="bike-used unused">
-            {{bike.bike_used ? 正在使用 : 未使用}}
+          <span class="bike-used unused" v-show="bike.bike_used === 0">
+            未使用
+          </span>
+          <span class="bike-used using" v-show="bike.bike_used === 1">
+            正在使用
           </span>
         </h2>
         <h3>{{bike.bike_type}}</h3>
@@ -25,6 +28,12 @@
   import { list } from 'api/bike'
 
   export default {
+    created() {
+      this._showList()
+    },
+    mounted() {
+      this._showList()
+    },
     computed: {
       ...mapGetters([
         'token',
@@ -45,6 +54,7 @@
           token: this.token
         }
         list(params).then(res => {
+          console.log(res)
           if (res.code === 0) {
             this.setBikeList(res.bikes)
           }

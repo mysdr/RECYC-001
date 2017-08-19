@@ -32,7 +32,7 @@
         'token',
         'uid',
         'timestamp',
-        'course'
+        'bike'
       ])
     },
     methods: {
@@ -42,7 +42,7 @@
       },
       _selectAdd() {
         this.$router.push({
-          path: '/course/creator'
+          path: '/bike/creator'
         })
       },
       _selectDelete() {

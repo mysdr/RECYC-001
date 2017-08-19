@@ -32,7 +32,7 @@ const mutations = {
     state.datingList = datings
   },
   [types.SET_DATING](state, dating) {
-    state.dating = bike
+    state.dating = dating
   }
 }
 

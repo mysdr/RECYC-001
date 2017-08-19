@@ -52,14 +52,19 @@
           token: this.token,
           bike_id: this.bikeId,
           bike_type: this.bikeType,
-          bike_location: this.bikeLocation,
-          bike_used: false,
+          bike_position: this.bikeLocation,
+          bike_used: 0,
           bike_update: +new Date(),
           bike_register: +new Date()
         }
+        console.log(params)
         create(params).then(res => {
+          console.log(res)
           if (res.code === 0) {
             this.$swal('添加成功!', '您已成功录入该车辆数据！', 'success')
+            this.$router.push({
+              path: '/bike/'
+            })
           }
         })
       }

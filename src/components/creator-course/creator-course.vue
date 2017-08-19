@@ -64,6 +64,9 @@
         create(params).then(res => {
           if (res.code === 0) {
             this.$swal('添加成功!', '您已成功录入该课程数据！', 'success')
+            this.$router.push({
+              path: '/course/'
+            })
           }
         })
       }
