@@ -17,7 +17,7 @@
         <div class="label">约课时间段</div>
         <Row class="datepicker">
           <Col span="24">
-          <Date-picker type="daterange" v-model="datingTime" placeholder="选择时间"></Date-picker>
+          <Date-picker type="daterange" v-model="datingTime" placeholder="选择时间" @on-change="onChangeDate"></Date-picker>
           </Col>
         </Row>
       </div>
@@ -35,7 +35,7 @@
         courseId: '',
         datingId: '',
         datingCapacity: '',
-        datingTime: ''
+        datingTime: []
       }
     },
     computed: {
@@ -68,6 +68,10 @@
             })
           }
         })
+      },
+      onChangeDate(value) {
+        console.log(value)
+        this.datingTime = value
       }
     }
   }
