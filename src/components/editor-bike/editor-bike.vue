@@ -9,8 +9,11 @@
       <div>
         <h2>
           <span ref="bikeIdField" @click="_edit('bike_id')">ID：{{bike.bike_id}}</span>
-          <span class="bike-used unused">
-            {{bike.bike_used ? '正在使用' : '未使用'}}
+          <span class="bike-used unused" v-show="bike.bike_used === 0">
+            未使用
+          </span>
+          <span class="bike-used using" v-show="bike.bike_used === 1">
+            正在使用
           </span>
         </h2>
         <h3 ref="bikeTypeField" @click="_edit('bike_type')">{{bike.bike_type}}</h3>

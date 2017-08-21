@@ -7,27 +7,69 @@
       </div>
       <div>
         <div class="label">约课ID</div>
-        <Input ref="courseName" v-model="ordereName" placeholder="请输入..."/>
+        <Input ref="datingId" v-model="datingId" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label label-inline">约课容量</div>
-        <Input type="number" class="input-small" ref="courseCapacity" v-model="orderCapacity" placeholder="请输入..." />
+        <Input type="number" class="input-small" ref="datingCapacity" v-model="datingCapacity" placeholder="请输入..." />
       </div>
       <div>
         <div class="label">约课时间段</div>
         <Row class="datepicker">
           <Col span="24">
-          <Date-picker type="daterange"  placeholder="选择时间"></Date-picker>
+          <Date-picker type="daterange" v-model="datingTime" placeholder="选择时间"></Date-picker>
           </Col>
         </Row>
       </div>
-      <Button type="primary" class="btn-create">添加</Button>
+      <Button type="primary" class="btn-create" @click="_createOrder">添加</Button>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import { mapGetters } from 'vuex'
+  import { create } from 'api/dating'
   export default {
+    data() {
+      return {
+        courseId: '',
+        datingId: '',
+        datingCapacity: '',
+        datingTime: ''
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'token',
+        'uid',
+        'timestamp'
+      ])
+    },
+    methods: {
+      _createOrder () {
+        let params = {
+          uid: this.uid,
+          token: this.token,
+          timestamp: this.timestamp,
+          course_id: this.courseId,
+          dating_id: this.datingId,
+          dating_rating: 0,
+          dating_users: '',
+          dating_time: this.datingTime,
+          dating_capacity: this.datingCapacity,
+          course_register: +new Date()
+        }
+        console.log(params)
+        create(params).then(res => {
+          if (res.code === 0) {
+            this.$swal('添加成功!', '您已成功录入该课程数据！', 'success')
+            this.$router.push({
+              path: '/order/'
+            })
+          }
+        })
+      }
+    }
   }
 </script>
 
