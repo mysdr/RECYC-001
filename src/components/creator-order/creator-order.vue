@@ -55,12 +55,13 @@
           dating_id: this.datingId,
           dating_rating: 0,
           dating_users: '',
-          dating_time: this.datingTime,
+          dating_time: this.datingTime[0] + '-' + this.datingTime[1],
           dating_capacity: this.datingCapacity,
-          course_register: +new Date()
+          dating_register: +new Date()
         }
         console.log(params)
         create(params).then(res => {
+          console.log(res)
           if (res.code === 0) {
             this.$swal('添加成功!', '您已成功录入该课程数据！', 'success')
             this.$router.push({
