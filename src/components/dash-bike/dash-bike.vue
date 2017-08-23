@@ -124,6 +124,6 @@
 
     h3
       margin-top 1px
-      font-size 0.9em
+      font-size 1em
 
 </style>

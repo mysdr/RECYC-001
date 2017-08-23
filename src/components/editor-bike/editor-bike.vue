@@ -187,7 +187,7 @@
 
   .bike-info
     width 100%
-    height 190px
+    height 210px
     margin-top 50px
 
     div
