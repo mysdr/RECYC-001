@@ -14,6 +14,10 @@
         <Input ref="courseId" v-model="courseTeacher" placeholder="请输入..."/>
       </div>
       <div>
+        <div class="label">导师电话</div>
+        <Input type="number" ref="courseId" v-model="courseTeacherNumber" placeholder="请输入..."/>
+      </div>
+      <div>
         <div class="label label-inline">课程容量</div>
         <Input type="number" ref="courseCapacity" v-model="courseCapacity" placeholder="请输入..." class="input-small"/>
       </div>
@@ -36,6 +40,7 @@
         courseId: '',
         courseName: '',
         courseTeacher: '',
+        courseTeacherNumber: '',
         courseCapacity: '',
         courseContent: ''
       }
@@ -82,7 +87,7 @@
 
   .creation
     width 100%
-    height 420px
+    height 450px
     background: white
 
     .creation-info
