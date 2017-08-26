@@ -25,8 +25,7 @@
           <h3>本期约课注册时间： {{_toDate(dating.dating_register)}}</h3>
         </div>
         <div>
-          <star :size="36" :rating="5" class="star"></star>
-          <h2>5</h2>
+          <star :size="36" :rating="dating.dating_rating" class="star"></star>
           <h4>评价星数</h4>
         </div>
       </div>

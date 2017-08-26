@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="editor">
-      <span class="add"  @click="_selectAdd"></span>
+      <span class="add" @click="_selectAdd"></span>
       <span class="delete" @click="_selectDelete"></span>
       <span class="edit" @click="_selectEdit"></span>
     </div>
@@ -20,8 +20,8 @@
         <h3 ref="bikePositionField" @click="_edit('bike_position')">位置：{{bike.bike_position}}</h3>
         <h3>注册时间：{{_toDate(bike.bike_register)}}</h3>
         <h3>最后维护时间：{{_toDate(bike.bike_update)}}</h3>
-        <Button type="primary" >维护车辆</Button>
-        <Button type="success" @click="_successbtn">{{this.successbtn ? '使用车辆' : '归还车辆'}}</Button>
+        <Button type="primary" @click="updateBike">维护车辆</Button>
+        <Button type="success" @click="useBike">{{bike.bike_used === 0 ? '使用车辆' : '归还车辆'}}</Button>
       </div>
     </div>
   </div>
@@ -33,7 +33,7 @@
   export default {
     data() {
       return {
-        successbtn: true
+        mode: 0
       }
     },
     computed: {
@@ -114,17 +114,69 @@
               timestamp: this.timestamp,
               field: text
             }
-            edit(params, this.course.id, field).then(res => {
+            edit(params, this.bike.id, field).then(res => {
               console.log(res)
               if (res.code === 0) {
-                this.setCourse(res.course)
+                this.setBike(res.bike)
               }
             })
           })
         }
       },
-      _successbtn() {
-        this.successbtn = !this.successbtn
+      updateBike() {
+        let params = {
+          uid: this.uid,
+          token: this.token,
+          timestamp: this.timestamp
+        }
+        this.$swal({
+          title: '是否确定',
+          text: '您将更新该车辆的维护时间，该操作不可逆!',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#DD6B55',
+          confirmButtonText: '删除',
+          cancelButtonText: '取消',
+          closeOnConfirm: false,
+          closeOnCancel: false
+        }, function (isConfirm) {
+          if (isConfirm) {
+            edit(params, this.bike.id, 'bike_update').then(res => {
+              if (res.code === 0) {
+                this.setBike(res.bike)
+              }
+              this.$swal('维护车辆！', '您已成功更新车辆的维护时间数据。', 'success')
+            })
+          }
+        })
+      },
+      useBike() {
+        let params = {
+          uid: this.uid,
+          token: this.token,
+          timestamp: this.timestamp,
+          field: this.bike.bike_used === 0 ? 1 : 0
+        }
+        this.$swal({
+          title: '是否确定',
+          text: '您是否确定使用/归还车辆？',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#DD6B55',
+          confirmButtonText: '删除',
+          cancelButtonText: '取消',
+          closeOnConfirm: false,
+          closeOnCancel: false
+        }, function (isConfirm) {
+          if (isConfirm) {
+            edit(params, this.bike.id, 'bike_used').then(res => {
+              if (res.code === 0) {
+                this.setBike(res.bike)
+              }
+              this.$swal('维护车辆！', '您已成功更新车辆的维护时间数据。', 'success')
+            })
+          }
+        })
       },
       ...mapMutations({
         setBike: 'SET_BIKE'
