@@ -42,7 +42,7 @@
       </div>
       <div class="remark">
         <div class="label">备注</div>
-        <Input ref="userNote" v-model="userNote" type="textarea" placeholder="请输入..." rows="5" class="textarea"/>
+        <Input ref="userNote" v-model="userNote" type="textarea" placeholder="请输入..." :rows="5" class="textarea"/>
       </div>
       <Button type="primary" class="btn-create" @click="_createUser()">添加</Button>
     </div>

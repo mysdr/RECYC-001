@@ -76,260 +76,44 @@
             </div>
           </li>
         </ul>
-        <ul>
+        <ul  v-for="(user, key) in userList" v-if="key < 7">
           <li>
-            <img src="../../common/image/default.png">
+            <img :src="user.user_face">
           </li>
           <li>
             <div>
-              邓国雄
+              {{user.user_name}}
               <icon type="female" class="female"></icon>
             </div>
           </li>
           <li>
             <div>
-              20
+              {{user.user_age}}
             </div>
           </li>
           <li>
             <div>
-              50KG
+              {{user.user_weight}}KG
             </div>
           </li>
           <li>
             <div>
-              15%
+              {{user.user_fat}}%
             </div>
           </li>
           <li>
             <div>
-              gx-deng
+              {{user.user_wechat}}
             </div>
           </li>
           <li>
             <div>
-              110
-            </div>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <img src="../../common/image/default.png">
-          </li>
-          <li>
-            <div>
-              邓国雄
-              <icon type="female" class="female"></icon>
-            </div>
-          </li>
-          <li>
-            <div>
-              20
-            </div>
-          </li>
-          <li>
-            <div>
-              50KG
-            </div>
-          </li>
-          <li>
-            <div>
-              15%
-            </div>
-          </li>
-          <li>
-            <div>
-              gx-deng
-            </div>
-          </li>
-          <li>
-            <div>
-              110
-            </div>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <img src="../../common/image/default.png">
-          </li>
-          <li>
-            <div>
-              邓国雄
-              <icon type="female" class="female"></icon>
-            </div>
-          </li>
-          <li>
-            <div>
-              20
-            </div>
-          </li>
-          <li>
-            <div>
-              50KG
-            </div>
-          </li>
-          <li>
-            <div>
-              15%
-            </div>
-          </li>
-          <li>
-            <div>
-              gx-deng
-            </div>
-          </li>
-          <li>
-            <div>
-              110
-            </div>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <img src="../../common/image/default.png">
-          </li>
-          <li>
-            <div>
-              邓国雄
-              <icon type="female" class="female"></icon>
-            </div>
-          </li>
-          <li>
-            <div>
-              20
-            </div>
-          </li>
-          <li>
-            <div>
-              50KG
-            </div>
-          </li>
-          <li>
-            <div>
-              15%
-            </div>
-          </li>
-          <li>
-            <div>
-              gx-deng
-            </div>
-          </li>
-          <li>
-            <div>
-              110
-            </div>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <img src="../../common/image/default.png">
-          </li>
-          <li>
-            <div>
-              邓国雄
-              <icon type="female" class="female"></icon>
-            </div>
-          </li>
-          <li>
-            <div>
-              20
-            </div>
-          </li>
-          <li>
-            <div>
-              50KG
-            </div>
-          </li>
-          <li>
-            <div>
-              15%
-            </div>
-          </li>
-          <li>
-            <div>
-              gx-deng
-            </div>
-          </li>
-          <li>
-            <div>
-              110
-            </div>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <img src="../../common/image/default.png">
-          </li>
-          <li>
-            <div>
-              邓国雄
-              <icon type="female" class="female"></icon>
-            </div>
-          </li>
-          <li>
-            <div>
-              20
-            </div>
-          </li>
-          <li>
-            <div>
-              50KG
-            </div>
-          </li>
-          <li>
-            <div>
-              15%
-            </div>
-          </li>
-          <li>
-            <div>
-              gx-deng
-            </div>
-          </li>
-          <li>
-            <div>
-              110
-            </div>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <img src="../../common/image/default.png">
-          </li>
-          <li>
-            <div>
-              邓国雄
-              <icon type="female" class="female"></icon>
-            </div>
-          </li>
-          <li>
-            <div>
-              20
-            </div>
-          </li>
-          <li>
-            <div>
-              50KG
-            </div>
-          </li>
-          <li>
-            <div>
-              15%
-            </div>
-          </li>
-          <li>
-            <div>
-              gx-deng
-            </div>
-          </li>
-          <li>
-            <div>
-              110
+              {{user.user_connect}}
             </div>
           </li>
         </ul>
       </div>
-      <Page :current="1" :total="50" page-size="7" simple></Page>
+      <Page :current="1" :total="50" :page-size="7" @on-change="_pageChange" simple></Page>
     </div>
   </div>
 </template>
@@ -343,7 +127,8 @@
     data () {
       return {
         mode: 0,
-        users: []
+        users: [],
+        userList: []
       }
     },
     created() {
@@ -358,6 +143,21 @@
       ])
     },
     methods: {
+      _pageChange(page) {
+        console.log(this.users)
+        let i = 0
+        let pageStart = 7 * (page - 1)
+        let pageEnd = 7 * page
+        if (pageEnd >= this.users.length) {
+          pageEnd = this.users.length
+        }
+        this.userList = []
+        for (let k = pageStart; k < pageEnd; k++) {
+          this.userList[i] = this.users[k]
+          i++
+        }
+        console.log(this.userList)
+      },
       _showUserList(userIds) {
         console.log(userIds)
         let params = {
@@ -369,6 +169,7 @@
         showUsers(params).then(res => {
           console.log(res)
           this.users = res.users
+          this.userList = res.users
         })
       },
       _toDate(ts) {
