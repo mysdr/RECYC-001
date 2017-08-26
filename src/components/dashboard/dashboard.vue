@@ -2,13 +2,11 @@
   <div class="layout" :class="{'layout-hide-text': spanLeft < 5}">
     <Row type="flex">
       <i-col :span="spanLeft" class="layout-menu-left">
-        <Menu active-name="1" theme="dark" width="auto">
+        <Menu @on-select="_selectMenu" active-name="1" theme="dark" width="auto">
           <div class="layout-logo-left"></div>
           <Menu-item name="1">
-            <div @click="_selectUser()">
-              <Icon type="ios-navigate" :size="iconSize"></Icon>
-              <span class="layout-text">用户管理</span>
-            </div>
+            <Icon type="ios-navigate" :size="iconSize"></Icon>
+            <span class="layout-text">用户管理</span>
           </Menu-item>
           <Submenu name="2">
             <template slot="title">
@@ -16,23 +14,17 @@
               课程管理
             </template>
             <Menu-item name="2-1">
-              <div @click="_selectCourse()">
-                <Icon type="ios-keypad" :size="iconSize"></Icon>
-                <span class="layout-text">课程列表</span>
-              </div>
+              <Icon type="ios-keypad" :size="iconSize"></Icon>
+              <span class="layout-text">课程列表</span>
             </Menu-item>
             <Menu-item name="2-2">
-              <div @click="_selectOrder()">
-                <Icon type="ios-calendar" :size="iconSize"></Icon>
-                <span class="layout-text">约课</span>
-              </div>
+              <Icon type="ios-calendar" :size="iconSize"></Icon>
+              <span class="layout-text">约课</span>
             </Menu-item>
           </Submenu>
           <Menu-item name="3">
-            <div @click="_selectBike()">
-              <Icon type="ios-analytics" :size="iconSize"></Icon>
-              <span class="layout-text">车辆管理</span>
-            </div>
+            <Icon type="ios-analytics" :size="iconSize"></Icon>
+            <span class="layout-text">车辆管理</span>
           </Menu-item>
         </Menu>
       </i-col>
@@ -81,22 +73,44 @@
           this.spanRight = 19
         }
       },
+      _selectMenu(name) {
+        switch (name) {
+          case '1':
+            this._selectUser()
+            break
+          case '2-1':
+            this._selectCourse()
+            break
+          case '2-2':
+            this._selectOrder()
+            break
+          case '3':
+            this._selectBike()
+            break
+          default:
+            break
+        }
+      },
       _selectUser() {
+        console.log('_selectUser')
         this.$router.push({
           path: '/'
         })
       },
       _selectCourse() {
+        console.log('_selectCourse')
         this.$router.push({
           path: '/course'
         })
       },
       _selectBike() {
+        console.log('_selectBike')
         this.$router.push({
           path: '/bike'
         })
       },
       _selectOrder() {
+        console.log('_selectOrder')
         this.$router.push({
           path: '/order'
         })
