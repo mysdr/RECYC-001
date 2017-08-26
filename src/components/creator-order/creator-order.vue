@@ -89,7 +89,7 @@
     height 320px
     background: white
     @media (min-width: 1024px) and (max-width: 1224px)
-      height 530px
+      height 280px
 
     .creation-info
       width 68%
@@ -99,7 +99,7 @@
       @media (min-width: 1224px) and (max-width: 1524px)
         width 68%
       @media (min-width: 1024px) and (max-width: 1224px)
-        width 500px
+        width 550px
 
       div
         padding 2px 0
@@ -127,7 +127,7 @@
             margin 0 10px
             font-size 1.2em
           @media (min-width: 1024px) and (max-width: 1224px)
-            width 14%
+            width 80px
             margin 0 10px
             font-size 1.2em
 

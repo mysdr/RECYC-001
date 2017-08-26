@@ -7,15 +7,24 @@
     </div>
     <div class="info">
       <div class="course-info">
-        <img src="./default.jpg">
-        <div>
-          <h2>{{dating.course_name}}</h2>
-          <h3 ref="courseTeacherField" @click="_edit('course_teacher')">课程导师：{{dating.course_teacher}}</h3>
-          <h3>课程ID：{{dating.courseId}}</h3>
-          <!--<h3 ref="courseCapacityField">容量： {{dating.course_content}}</h3>-->
-          <!--不要课程容量，而是需要课程简介-->
-          <h3>注册时间：2017-04-14</h3>
-        </div>
+        <Tabs>
+          <Tab-pane label="课程信息">
+            <div>
+              <img src="./default.jpg">
+            </div>
+            <div>
+              <h2>{{dating.course_name}}</h2>
+              <h3 ref="courseTeacherField" @click="_edit('course_teacher')">课程导师：{{dating.course_teacher}}</h3>
+              <h3>课程ID：{{dating.courseId}}</h3>
+              <!--<h3 ref="courseCapacityField">容量： {{dating.course_content}}</h3>-->
+              <!--不要课程容量，而是需要课程简介-->
+              <h3>注册时间：2017-04-14</h3>
+            </div>
+          </Tab-pane>
+          <Tab-pane label="课程简介">
+            <h3>{{dating.course_content}}</h3>
+          </Tab-pane>
+        </Tabs>
       </div>
       <div class="order-info">
         <div>
@@ -455,7 +464,7 @@
 
   pink = #FF69B4
   blue = #2d8cf0
-  grey = #b6bbc2
+  grey = #7b838a
   white = #fff
 
   .editor
@@ -502,47 +511,60 @@
 
   .info
     width 100%
-    height 200px
+    height 180px
     margin-top 50px
+
+  .ivu-tabs
+    width 100%
 
   .course-info
     float left
     width 48%
-    height 200px
+    height 180px
     background white
+    @media (min-width: 1024px) and (max-width: 1220px)
+      height 180px
 
     img
-      float left
-      width 246px
-      margin 40px 20px
+      width 200px
+      margin 5px 15px 0 15px
 
     div
       float left
 
     h2
-      margin-top 32px
+      margin-top 5px
       margin-left 10px
-      font-size 1.8em
+      font-size 1.6em
+      @media (min-width: 1024px) and (max-width: 1100px)
+        margin-left 0
+        font-size 1.4em
 
     h3
       margin-left 10px
       color grey
-      font-size 1.4em
+      font-size 1.3em
+      @media (min-width: 1024px) and (max-width: 1100px)
+        margin-left 0
+        font-size 1.2em
 
   .order-info
     float left
     width 51%
-    height 200px
+    height 180px
     margin-left 1%
     background white
 
     div
       float left
-      width 50%
+      width auto
       height  100%
-      padding-top 45px
+      padding-top 35px
+
 
     div:last-child
+      float right
+      padding-right 10%
       text-align center
 
     h2
@@ -552,6 +574,8 @@
       margin-top 2px
       margin-left 30px
       font-size 1.4em
+      @media (min-width: 1024px) and (max-width: 1100px)
+        font-size 1.2em
 
     h4
       font-size 1.4em
@@ -605,6 +629,7 @@
       color grey
 
     .ivu-page
+      border 0
       text-align center
       line-height 40px
 </style>
