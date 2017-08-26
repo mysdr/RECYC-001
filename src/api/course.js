@@ -7,7 +7,7 @@ export function list(params) {
 }
 
 export function show(params, id) {
-  const url = HOST + `/v1/courses/${id}`
+  const url = HOST + `/v1/courses/show/${id}`
   return jsonp(url, params)
 }
 
@@ -17,7 +17,7 @@ export function create(params) {
 }
 
 export function remove(params, id) {
-  const url = HOST + `/v1/courses/edit/${id}`
+  const url = HOST + `/v1/courses/remove/${id}`
   return jsonp(url, params)
 }
 

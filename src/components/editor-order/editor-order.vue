@@ -1,27 +1,28 @@
 <template>
   <div>
     <div class="editor">
-      <span class="add"></span>
-      <span class="delete"></span>
-      <span class="edit"></span>
+      <span class="add" @click="_selectAdd()"></span>
+      <span class="delete" @click="_selectDelete()"></span>
+      <span class="edit" @click="_selectEdit()"></span>
     </div>
     <div class="info">
       <div class="course-info">
         <img src="./default.jpg">
         <div>
-          <h2 ref="courseNameField">健身课程001</h2>
-          <h3>课程导师： 邓国雄</h3>
-          <h3 ref="courseIdField">ID：01</h3>
-          <h3 ref="courseCapacityField">容量： 3人</h3>
+          <h2>{{dating.course_name}}</h2>
+          <h3 ref="courseTeacherField" @click="_edit('course_teacher')">课程导师：{{dating.course_teacher}}</h3>
+          <h3>课程ID：{{dating.courseId}}</h3>
+          <!--<h3 ref="courseCapacityField">容量： {{dating.course_content}}</h3>-->
+          <!--不要课程容量，而是需要课程简介-->
           <h3>注册时间：2017-04-14</h3>
         </div>
       </div>
       <div class="order-info">
         <div>
-          <h3>约课ID： 01</h3>
-          <h3>约课容量： 3人</h3>
-          <h3>约课时间段： 14：00 - 17：00</h3>
-          <h3>约课注册时间： 2017-08-08</h3>
+          <h3 ref="datingIdField" @click="_edit('dating_id')">约课ID： {{dating.dating_id}}</h3>
+          <h3 ref="datingCapacityField" @click="_edit('dating_capacity')">本期约课容量： {{dating.dating_capacity}}人</h3>
+          <h3>本期约课时间段： {{dating.dating_time}}</h3>
+          <h3>本期约课注册时间： {{_toDate(dating.dating_register)}}</h3>
         </div>
         <div>
           <star :size="36" :rating="5" class="star"></star>
@@ -327,7 +328,123 @@
 
 <script>
   import Star from 'base/star/star'
+  import { mapGetters, mapMutations } from 'vuex'
+  import { remove, edit } from 'api/dating'
+  import { showUsers } from 'api/user'
   export default {
+    data () {
+      return {
+        mode: 0,
+        users: []
+      }
+    },
+    created() {
+      this._showUserList(this.dating.dating_users)
+    },
+    computed: {
+      ...mapGetters([
+        'token',
+        'uid',
+        'timestamp',
+        'dating'
+      ])
+    },
+    methods: {
+      _showUserList(userIds) {
+        console.log(userIds)
+        let params = {
+          uid: this.uid,
+          timestamp: this.timestamp,
+          token: this.token,
+          ids: userIds
+        }
+        showUsers(params).then(res => {
+          console.log(res)
+          this.users = res.users
+        })
+      },
+      _toDate(ts) {
+        let date = new Date(ts)
+        return date.getYear() + 1900 + '年' + date.getMonth() + '月' + date.getDate() + '日'
+      },
+      _selectAdd() {
+        this.$router.push({
+          path: '/order/creator'
+        })
+      },
+      _selectEdit() {
+        if (this.mode === 0) {
+          this.$swal('编辑模式！', '您已进入编辑模式，点击蓝色元素可以修改用户数据，再次点击编辑按钮可以退出编辑模式。', 'success')
+          this.mode = 1
+          this.$refs.datingIdField.style.color = '#0F88EB'
+          this.$refs.courseTeacherField.style.color = '#0F88EB'
+          this.$refs.datingCapacityField.style.color = '#0F88EB'
+        } else {
+          this.$swal('退出编辑模式！', '您已退出编辑模式，再次点击编辑按钮可以进入编辑模式。', 'success')
+          this.$refs.datingIdField.style.color = 'black'
+          this.$refs.courseTeacherField.style.color = 'black'
+          this.$refs.datingCapacityField.style.color = 'black'
+          this.mode = 0
+        }
+      },
+      _edit(field) {
+        if (this.mode === 1) {
+          this.$swal({
+            title: '请输入更新的数据内容',
+            input: 'text',
+            showCancelButton: true,
+            confirmButtonText: '确定',
+            showLoaderOnConfirm: true,
+            allowOutsideClick: false
+          }).then(text => {
+            let params = {
+              uid: this.uid,
+              token: this.token,
+              timestamp: this.timestamp,
+              field: text
+            }
+            edit(params, this.course.id, field).then(res => {
+              console.log(res)
+              if (res.code === 0) {
+                this.setDating(res.dating)
+              }
+            })
+          })
+        }
+      },
+      _selectDelete() {
+        let params = {
+          uid: this.uid,
+          token: this.token,
+          timestamp: this.timestamp
+        }
+        this.$swal({
+          title: '是否确定',
+          text: '您将删除该课程，该操作不可逆!',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#DD6B55',
+          confirmButtonText: '删除',
+          cancelButtonText: '取消',
+          closeOnConfirm: false,
+          closeOnCancel: false
+        }, function (isConfirm) {
+          if (isConfirm) {
+            remove(params, this.dating.id).then(res => {
+              if (res.code === 0) {
+                this.$swal('删除成功!', '您已成功删除该约课数据！', 'success')
+                this.$router.push({
+                  path: '/order'
+                })
+              }
+            })
+          }
+        })
+      },
+      ...mapMutations({
+        setDating: 'SET_DATING'
+      })
+    },
     components: {
       Star
     }

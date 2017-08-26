@@ -6,8 +6,8 @@ export function list(params) {
   return jsonp(url, params)
 }
 
-export function show(params) {
-  const url = HOST + `/v1/bikes/detail`
+export function show(params, id) {
+  const url = HOST + `/v1/bikes/show/${id}`
   return jsonp(url, params)
 }
 
@@ -17,7 +17,7 @@ export function create(params) {
 }
 
 export function remove(params, id) {
-  const url = HOST + `/v1/bikes/edit/${id}`
+  const url = HOST + `/v1/bikes/remove/${id}`
   return jsonp(url, params)
 }
 

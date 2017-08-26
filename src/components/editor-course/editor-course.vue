@@ -87,7 +87,7 @@
               if (res.code === 0) {
                 this.$swal('删除成功!', '您已成功删除该课程数据！', 'success')
                 this.$router.push({
-                  path: '/'
+                  path: '/course'
                 })
               }
             })

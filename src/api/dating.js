@@ -7,7 +7,7 @@ export function list(params) {
 }
 
 export function show(params, id) {
-  const url = HOST + `/v1/datings/detail`
+  const url = HOST + `/v1/datings/show/${id}`
   return jsonp(url, params)
 }
 
@@ -17,7 +17,7 @@ export function create(params) {
 }
 
 export function remove(params, id) {
-  const url = HOST + `/v1/datings/edit/${id}`
+  const url = HOST + `/v1/datings/remove/${id}`
   return jsonp(url, params)
 }
 
