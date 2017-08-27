@@ -22,13 +22,6 @@
             </div>
           </div>
         </div>
-        <div class="userinfo-content">
-          <ul class="userinfo-item">
-            <li>项目一</li>
-            <li>项目二</li>
-            <li>项目三</li>
-          </ul>
-        </div>
       </Card>
     </div>
   </div>
@@ -111,7 +104,7 @@
       color rgba(45,140,240,0.7)
 
   .user-card
-    width 260px
+    width 160px
     float left
     margin-right 20px
     margin-bottom 20px

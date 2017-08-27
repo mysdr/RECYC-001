@@ -16,8 +16,6 @@
               <h2>{{dating.course_name}}</h2>
               <h3 ref="courseTeacherField" @click="_edit('course_teacher')">课程导师：{{dating.course_teacher}}</h3>
               <h3>课程ID：{{dating.courseId}}</h3>
-              <!--<h3 ref="courseCapacityField">容量： {{dating.course_content}}</h3>-->
-              <!--不要课程容量，而是需要课程简介-->
               <h3>注册时间：2017-04-14</h3>
             </div>
           </Tab-pane>
