@@ -22,32 +22,10 @@
     </div>
     <div class="user-mid">
       <div>
-        <div>
-          <icon type="stats-bars" color="grey" size="25"></icon>
-          <h2 ref="userWeightField" @click="_edit('user_weight')">{{user.user_weight}}KG</h2>
-          <h3>体重</h3>
-          <icon type="arrow-down-c" color="green" size="18"></icon>
-          <span>1KG</span>
-        </div>
-        <div>
-          <icon type="stats-bars" color="grey" size="25"></icon>
-          <h2 ref="userFatField" @click="_edit('user_fat')">{{user.user_fat}}%</h2>
-          <h3>体脂</h3>
-          <icon type="arrow-down-c" color="green" size="18"></icon>
-          <span>0.1%</span>
-        </div>
+        <div id="weight"></div>
       </div>
       <div>
-        <div>
-          <icon type="ios-timer-outline" color="grey" size="25"></icon>
-          <h2>{{user.user_learn_time}}h</h2>
-          <h3>课程时长</h3>
-        </div>
-        <div>
-          <icon type="ios-star-outline" color="grey" size="25"></icon>
-          <h2>{{user.user_rating}}</h2>
-          <h3>评价星数</h3>
-        </div>
+        <div id="fat"></div>
       </div>
     </div>
     <div class="user-bottom">
@@ -128,6 +106,7 @@
 
 <script>
   import Star from 'base/star/star'
+  import echarts from 'echarts'
   import { mapGetters, mapMutations } from 'vuex'
   import { remove, edit } from 'api/user'
 
@@ -145,7 +124,128 @@
         'user'
       ])
     },
+    mounted() {
+      this.initCharts()
+    },
     methods: {
+      initCharts() {
+        this.weightchart = echarts.init(document.getElementById('weight'))
+        this.setWeightOptions()
+        this.fatchart = echarts.init(document.getElementById('fat'))
+        this.setFatOptions()
+      },
+      setWeightOptions() {
+        this.weightchart.setOption({
+          title: {
+            text: '一周体重(KG)'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          legend: {
+            data: ['体重']
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: [
+            {
+              type: 'category',
+              boundaryGap: false,
+              data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            }
+          ],
+          yAxis: [
+            {
+              type: 'value',
+              min: 45,
+              max: 75
+            }
+          ],
+          series: [
+            {
+              name: '体重',
+              type: 'line',
+              stack: '总量',
+              areaStyle: {
+                normal: {
+                  color: '#2d8cf0'
+                }
+              },
+              label: {
+                normal: {
+                  show: true,
+                  position: 'top'
+                }
+              },
+              data: [58, 60, 57, 55, 58, 50, 52]
+            }
+          ],
+          color: ['#2d8cf0']
+        })
+      },
+      setFatOptions() {
+        this.fatchart.setOption({
+          title: {
+            text: '一周体脂(%)'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          legend: {
+            data: ['体脂']
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: [
+            {
+              type: 'category',
+              boundaryGap: false,
+              data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            }
+          ],
+          yAxis: [
+            {
+              type: 'value',
+              min: 18,
+              max: 13
+            }
+          ],
+          series: [
+            {
+              name: '体脂',
+              type: 'line',
+              stack: '总量',
+              areaStyle: {normal: {}},
+              label: {
+                normal: {
+                  show: true,
+                  position: 'top'
+                }
+              },
+              data: [16, 15, 15.2, 15, 14.9, 14.8, 15]
+            }
+          ],
+          color: ['#009900']
+        })
+      },
       _selectAdd() {
         this.$router.push({
           path: '/user/creator'
@@ -372,82 +472,47 @@
         font-size 1.1em
 
   .user-mid
-    @media (min-width:1366px)
-      height 200px
-    @media (min-width:1024px) and (max-width:1366px)
-      height 150px
+    height 320px
 
   .user-mid div
     float left
     width 49%
+    height 100%
     margin-top 20px
-    margin-right 2%
+    margin-right 1%
+    padding-top 10px
     background white
     -webkit-border-radius 5px
     -moz-border-radius 5px
     border-radius 5px
-    @media (min-width:1366px)
-      height 200px
-    @media (min-width:1024px) and (max-width:1366px)
-      height 150px
 
     div
-      width 50%
+      width 100%
       margin 0
-      text-align center
-      @media (min-width:1366px)
-        padding-top 35px
-      @media (min-width:1024px) and (max-width:1366px)
-        padding-top 20px
-
-      h2
-        @media (min-width:1366px)
-          font-size 3em
-        @media (min-width:1024px) and (max-width:1366px)
-          font-size 2em
-
-      span
-        font-weight 600
-        color green
-        @media (min-width:1366px)
-          font-size 1.2em
-        @media (min-width:1024px) and (max-width:1366px)
-          font-size 1.1em
 
   .user-mid div:last-child
     margin-right 0
 
   .user-bottom
-    @media (min-width:1366px)
-      height 300px
-    @media (min-width:1024px) and (max-width:1366px)
-      height 200px
+    height 200px
 
   .user-bottomleft
     float left
     width 64%
+    min-width 400px
+    height 200px
     margin-top 20px
-    margin-right 2%
+    margin-right 1%
     background white
     -webkit-border-radius 5px
     -moz-border-radius 5px
     border-radius 5px
-    @media (min-width:1366px)
-      min-width 570px
-      height 300px
-    @media (min-width:1024px) and (max-width:1366px)
-      min-width 400px
-      height 200px
 
     .lesson
+      width 96%
       height 19.5%
+      margin 0 2%
       border-bottom 1px solid grey
-      @media (min-width:1366px)
-        width 90%
-        margin 0 5%
-      @media (min-width:1024px) and (max-width:1366px)
-        width 96%
-        margin 0 2%
 
     .lesson:last-child
       border-bottom 0
@@ -458,65 +523,40 @@
     .lesson li
       float left
       width 20%
-      font-weight 600
+      min-width 80px
+      padding-right 10px
+      line-height 35px
       text-align center
-      @media (min-width:1366px)
-        min-width 105px
-        padding-right 15px
-        font-size 1.25em
-        line-height 55px
-      @media (min-width:1024px) and (max-width:1366px)
-        min-width 80px
-        padding-right 10px
-        font-size 1.1em
-        line-height 35px
-
-    .lesson li:first-child
-      @media (min-width:1366px)
-        font-size 1.5em
+      font-size 1.1em
+      font-weight 600
 
     .star
-      @media (min-width:1366px)
-        height 55px
-        padding-top 5px
-        line-height 55px
-      @media (min-width:1024px) and (max-width:1366px)
-        height 30px
-        padding-top 5px
-        line-height 30px
+      height 30px
+      padding-top 5px
+      line-height 30px
 
   .user-bottomright
     float left
-    width 34%
+    width 35%
+    height 200px
     margin-top 20px
     background white
     -webkit-border-radius 5px
     -moz-border-radius 5px
     border-radius 5px
-    @media (min-width:1366px)
-      height 300px
-    @media (min-width:1024px) and (max-width:1366px)
-      height 200px
 
     div
       clear both
       width 85%
       height 33%
+      margin 0 5%
+      padding 10px 2px
       border-bottom 1px solid lightgrey
-      @media (min-width:1366px)
-        margin 0 7.5%
-        padding 20px 2px
-      @media (min-width:1024px) and (max-width:1366px)
-        margin 0 5%
-        padding 10px 2px
 
       h3
         margin-top 5px
         color grey
-        @media (min-width:1366px)
-          font-size 1.3em
-        @media (min-width:1024px) and (max-width:1366px)
-          font-size 1.3em
+        font-size 1.3em
 
     div:last-child
       border-bottom 0
