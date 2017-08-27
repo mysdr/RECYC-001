@@ -20,6 +20,36 @@
         <h4 ref="userNoteField" @click="_edit('user_note')">{{user.user_note}}</h4>
       </div>
     </div>
+    <div class="user-top">
+      <div>
+        <div>
+          <icon type="stats-bars" color="grey" size="25"></icon>
+          <h2 ref="userWeightField" @click="_edit('user_weight')">{{user.user_weight}}KG</h2>
+          <h3>体重</h3>
+          <icon type="arrow-down-c" color="green" size="18"></icon>
+          <span>1KG</span>
+        </div>
+        <div>
+          <icon type="stats-bars" color="grey" size="25"></icon>
+          <h2 ref="userFatField" @click="_edit('user_fat')">{{user.user_fat}}%</h2>
+          <h3>体脂</h3>
+          <icon type="arrow-down-c" color="green" size="18"></icon>
+          <span>0.1%</span>
+        </div>
+      </div>
+      <div>
+        <div>
+          <icon type="ios-timer-outline" color="grey" size="25"></icon>
+          <h2>{{user.user_learn_time}}h</h2>
+          <h3>课程时长</h3>
+        </div>
+        <div>
+          <icon type="ios-star-outline" color="grey" size="25"></icon>
+          <h2>{{user.user_rating}}</h2>
+          <h3>评价星数</h3>
+        </div>
+      </div>
+    </div>
     <div class="user-mid">
       <div>
         <div id="weight"></div>
@@ -470,6 +500,34 @@
         font-size 1.2em
       @media (min-width:1024px) and (max-width:1366px)
         font-size 1.1em
+
+
+  .user-top div
+    float left
+    width 50%
+    height 150px
+    margin-top 20px
+    background white
+    -webkit-border-radius 5px
+    -moz-border-radius 5px
+    border-radius 5px
+
+    div
+      width 50%
+      margin 0
+      text-align center
+      padding-top 20px
+
+      h2
+        font-size 2em
+
+      span
+        color green
+        font-size 1.1em
+        font-weight 600
+
+  .user-top div:last-child
+    margin-right 0
 
   .user-mid
     height 320px
