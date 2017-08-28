@@ -11,7 +11,7 @@
           <Submenu name="2">
             <template slot="title">
               <Icon type="ios-keypad" :size="iconSize"></Icon>
-              课程管理
+              <span class="layout-text">课程管理</span>
             </template>
             <Menu-item name="2-1">
               <Icon type="ios-keypad" :size="iconSize"></Icon>
