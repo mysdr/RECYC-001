@@ -23,6 +23,10 @@
             </Menu-item>
           </Submenu>
           <Menu-item name="3">
+            <Icon type="clipboard" :size="iconSize"></Icon>
+            <span class="layout-text">教练管理</span>
+          </Menu-item>
+          <Menu-item name="4">
             <Icon type="ios-analytics" :size="iconSize"></Icon>
             <span class="layout-text">车辆管理</span>
           </Menu-item>
@@ -85,6 +89,9 @@
             this._selectOrder()
             break
           case '3':
+            this._selectCoach()
+            break
+          case '4':
             this._selectBike()
             break
           default:
@@ -107,6 +114,12 @@
         console.log('_selectBike')
         this.$router.push({
           path: '/bike'
+        })
+      },
+      _selectCoach() {
+        console.log('_selectCoach')
+        this.$router.push({
+          path: '/coach'
         })
       },
       _selectOrder() {

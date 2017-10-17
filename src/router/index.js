@@ -79,6 +79,24 @@ const CreatorOrder = (resolve) => {
   })
 }
 
+const DashCoach = (resolve) => {
+  import('components/dash-coach/dash-coach').then((module) => {
+    resolve(module)
+  })
+}
+
+const EditorCoach = (resolve) => {
+  import('components/editor-coach/editor-coach').then((module) => {
+    resolve(module)
+  })
+}
+
+const CreatorCoach = (resolve) => {
+  import('components/creator-coach/creator-coach').then((module) => {
+    resolve(module)
+  })
+}
+
 const Login = (resolve) => {
   import('components/login/login').then((module) => {
     resolve(module)
@@ -158,6 +176,24 @@ export default new Router({
         {
           path: ':id',
           component: EditorOrder
+        }
+      ]
+    },
+    {
+      path: '/coach',
+      component: Dashboard,
+      children: [
+        {
+          path: '/',
+          component: DashCoach
+        },
+        {
+          path: 'creator',
+          component: CreatorCoach
+        },
+        {
+          path: ':id',
+          component: EditorCoach
         }
       ]
     },

@@ -3,22 +3,25 @@
     <div class="editor" @click="_selectAdd()">
       <Icon type="android-add-circle" class="add"></Icon>
     </div>
-    <div class="user-card" v-for="user in userList" @click="selectUser(user)">
+    <div class="user-card"  @click="selectUser(user)">
       <Card>
         <div class="userinfo-title">
-          <img :src="user.user_face" class="userinfo-head">
+          <img src="../../common/image/default.png" class="userinfo-head">
           <div class="userinfo">
             <div>
-              {{user.user_name}}
+              zyktrcn
               <span>
-              <Icon type="female" class="userinfo-gender female"></Icon>
-            </span>
+                <Icon type="female" class="userinfo-gender female"></Icon>
+              </span>
             </div>
             <div>
-              {{user.user_age}} 岁 | {{user.user_weight}} kg
+              23 岁 | 5 年
             </div>
             <div>
-              {{user.user_connect}}
+              维尼亚健身中心
+            </div>
+            <div class="userinfo-content">
+              这个教练很懒
             </div>
           </div>
         </div>
@@ -28,54 +31,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { mapGetters, mapMutations } from 'vuex'
-  import { list } from 'api/user'
 
-  export default {
-    created() {
-      this._showList()
-    },
-    mounted() {
-      this._showList()
-    },
-    computed: {
-      ...mapGetters([
-        'token',
-        'timestamp',
-        'uid',
-        'userList'
-      ])
-    },
-    methods: {
-      _showList() {
-        let params = {
-          uid: this.uid,
-          timestamp: this.timestamp,
-          token: this.token
-        }
-        list(params).then(res => {
-          if (res.code === 0) {
-            this.setUserList(res.users)
-          }
-        })
-      },
-      _selectAdd() {
-        this.$router.push({
-          path: '/user/creator'
-        })
-      },
-      selectUser(user) {
-        this.$router.push({
-          path: `/user/${user.id}`
-        })
-        this.setUser(user)
-      },
-      ...mapMutations({
-        setUserList: 'SET_USER_LIST',
-        setUser: 'SET_USER'
-      })
-    }
-  }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
