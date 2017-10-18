@@ -14,10 +14,84 @@
         </h3>
         <h4>用户账号：{{user.user_account}}</h4>
         <h4>用户注册时间：2017.06.01</h4>
+        <h4>年龄：23岁</h4>
+        <h4>身高：170cm</h4>
       </div>
       <div class="remark">
         <h3>备注</h3>
         <h4 ref="userNoteField" @click="_edit('user_note')">{{user.user_note}}</h4>
+      </div>
+    </div>
+    <div class="user-info">
+      <div class="body-info">
+        <h2>身体成分</h2>
+        <li>去脂体重:
+          <div>1 kg</div>
+        </li>
+        <li>体脂体重:
+          <div>1 kg</div>
+        </li>
+        <li>肌肉量:
+          <div>1 kg</div>
+        </li>
+        <li>骨质量:
+          <div>1 kg</div>
+        </li>
+        <li>蛋白质:
+          <div>1 kg</div>
+        </li>
+        <li>身体水分:
+          <div>1 kg</div>
+        </li>
+        <h4 class="clear"></h4>
+        <li class="measure">
+          测量日期：
+          <span>
+            2017年10月18日
+          </span>
+        </li>
+        <li class="measure">
+          测量时间：
+          <span>
+            15:00:00
+          </span>
+        </li>
+      </div>
+      <div class="fat-info">
+        <h2>肌肉脂肪控制</h2>
+        <li>体脂百分比:
+          <div>1 %</div>
+        </li>
+        <li>体脂指数:
+          <div>1 BMI</div>
+        </li>
+        <li>腰臀比:
+          <div>1 </div>
+        </li>
+        <li>内脏脂肪:
+          <div>1 VFI</div>
+        </li>
+        <li>标准体重:
+          <div>1 kg</div>
+        </li>
+        <li>控制体重:
+          <div>1 kg</div>
+        </li>
+        <li>基础代谢:
+          <div>1 cal</div>
+        </li>
+        <li>健康评分:
+          <div>1</div>
+        </li>
+        <li>控制脂肪:
+          <div>1 kg</div>
+        </li>
+        <li>控制肌肉:
+          <div>1 kg</div>
+        </li>
+        <li>生理年龄:
+          <div>23 岁</div>
+        </li>
       </div>
     </div>
     <div class="user-top">
@@ -373,6 +447,9 @@
   grey = #b6bbc2
   white = #fff
 
+  .clear
+   clear both
+
   .editor
     position absolute
     left 0
@@ -444,13 +521,14 @@
 
     .userinfo
       float left
-      margin-top 60px
       @media (min-width:1366px)
         min-width 200px
-        margin 36px
+        margin 30px
+        margin-bottom 0
       @media (min-width:1024px) and (max-width:1366px)
         min-width 150px
-        margin 36px 25px
+        margin 30px 25px
+        margin-bottom 0
 
       .female
         color pink
@@ -459,27 +537,25 @@
         color blue
 
     .userinfo h3
+      margin-bottom 5px
       @media (min-width:1366px)
         font-size 1.5em
       @media (min-width:1024px) and (max-width:1366px)
         font-size 1.3em
 
     .userinfo h4
-      margin-top 10px
       color grey
       @media (min-width:1366px)
         font-size 1.2em
       @media (min-width:1024px) and (max-width:1366px)
         font-size 1.1em
 
-    .userinfo h4:last-child
-      margin-top 0
 
     .remark
       float left
       width 40%
       height 100px
-      margin 36px
+      margin 25px
       margin-bottom 0
       @media (min-width:1366px)
         min-width 300px
@@ -502,11 +578,64 @@
         font-size 1.1em
 
 
+  .user-info div
+    float left
+    width 50%
+    height 200px
+    margin-top 20px
+    padding 1%
+    background white
+    -webkit-border-radius 5px
+    -moz-border-radius 5px
+    border-radius 5px
+
+    h2
+      color grey
+
+    .measure
+      width 200px
+      color grey
+
+  .body-info
+    width 100%
+
+    li
+      list-style none
+      float left
+      width 105px
+      margin 5% 8% 0 0
+      font-size 1.3em
+      font-weight bold
+
+      div
+        float right
+        width 35px
+        height 23px
+        margin 0
+        padding 0
+
+  .fat-info
+    width 100%
+
+    li
+      list-style none
+      float left
+      width 130px
+      margin 3% 5% 0 0
+      font-size 1.3em
+      font-weight bold
+
+      div
+        float right
+        width 45px
+        height 23px
+        margin 0
+        padding 0
+
   .user-top div
     float left
     width 50%
     height 150px
-    margin-top 20px
     background white
     -webkit-border-radius 5px
     -moz-border-radius 5px

@@ -29,10 +29,56 @@
       <div>
         <div class="label">年龄</div>
         <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
-        <div class="label label-inline">体重</div>
+        <div class="label label-inline">身高</div>
         <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
-        <div class="label label-inline">体脂</div>
+        <div class="label label-inline">体重</div>
         <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+      </div>
+      <div>
+        <div class="label">肌肉量</div>
+        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">骨质量</div>
+        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">蛋白质</div>
+        <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+      </div>
+      <div>
+        <div class="label">去脂体重</div>
+        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">体脂肪量</div>
+        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">身体水分</div>
+        <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+      </div>
+      <div>
+        <div class="label">腰臀比</div>
+        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">体质指数</div>
+        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">体脂%</div>
+        <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+      </div>
+      <div>
+        <div class="label">内脏脂肪</div>
+        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">标准体重</div>
+        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">控制体重</div>
+        <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+      </div>
+      <div>
+        <div class="label">基础代谢</div>
+        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">健康评分</div>
+        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">控制脂肪</div>
+        <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+      </div>
+      <div>
+        <div class="label">控制肌肉</div>
+        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">生理年龄</div>
+        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">微信</div>
@@ -128,7 +174,7 @@
 
   .creation
     width 100%
-    height 500px
+    height 800px
     background: white
     @media (min-width: 1024px) and (max-width: 1224px)
       height 530px
