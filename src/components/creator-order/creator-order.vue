@@ -14,6 +14,10 @@
         <Input type="number" class="input-small" ref="datingCapacity" v-model="datingCapacity" placeholder="请输入..." />
       </div>
       <div>
+        <div class="label">约课地点</div>
+        <Input ref="datingId" v-model="datingId" placeholder="请输入..."/>
+      </div>
+      <div>
         <div class="label">约课时间段</div>
         <Row class="datepicker">
           <Col span="24">
@@ -86,7 +90,6 @@
 
   .creation
     width 100%
-    height 320px
     background: white
     @media (min-width: 1024px) and (max-width: 1224px)
       height 280px

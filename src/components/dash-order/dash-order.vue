@@ -10,10 +10,14 @@
           <div class="course-star">
             <star :size="24" :rating="dating.dating_rating" class="star"></star>
           </div>
+          <div class="course-price">
+            300￥
+          </div>
           <h3>{{dating.course_name}}</h3>
           <h4>导师：{{dating.course_teacher}}</h4>
           <div>约课ID：{{dating.dating_id}}</div>
           <div>约课容量：{{dating.dating_capacity}} 人</div>
+          <div>约课地点：维尼亚健身中心</div>
           <div>约课时间段：{{dating.dating_time}}</div>
           <div>约课注册时间：{{_toDate(dating.dating_register)}}</div>
         </div>
@@ -119,6 +123,12 @@
         height 30px
         margin-top -30px
         padding 0 7px
+
+      .course-price
+        width 240px
+        height 30px
+        margin-top -30px
+        color white
 
       h3
         float left
