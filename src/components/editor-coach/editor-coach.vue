@@ -6,19 +6,19 @@
       <span class="edit" @click="_selectEdit()"></span>
     </div>
     <div class="user">
-      <img src="../../common/image/default.png" class="userinfo-head">
+      <img :src="coach.coach_head" class="userinfo-head">
       <div class="userinfo">
         <h3>
-          <span ref="userNameField" @click="_edit('user_name')">zyktrcn</span>
+          <span ref="userNameField" @click="_edit('user_name')">{{coach.coach_name}}</span>
           <icon type="female" class="female"></icon>
         </h3>
-        <h4>用户账号：1</h4>
+        <h4>用户账号：{{coach.coach_account}}</h4>
         <h4>工作时间：5年</h4>
         <h4>工作地方：维尼亚健身中心</h4>
       </div>
       <div class="remark">
         <h3>备注</h3>
-        <h4 ref="userNoteField" @click="_edit('user_note')">这个教练很懒</h4>
+        <h4 ref="userNoteField" @click="_edit('user_note')">{{coach.coach_sign</h4>
       </div>
     </div>
     <div class="user-bottom">
@@ -98,6 +98,46 @@
 </template>
 
 <script>
+  import Star from 'base/star/star'
+  import { mapGetters, mapMutations } from 'vuex'
+//  import { remove, edit } from 'api/coach'
+
+  export default {
+    data () {
+      return {
+        mode: 0
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'token',
+        'uid',
+        'timestamp',
+        'coach'
+      ])
+    },
+    mounted() {
+    },
+    methods: {
+      _selectAdd() {
+        this.$router.push({
+          path: '/coach/creator'
+        })
+      },
+      _selectDelete() {
+      },
+      _selectEdit() {
+      },
+      _edit(field) {
+      },
+      ...mapMutations({
+        setCoach: 'SET_COACH'
+      })
+    },
+    components: {
+      Star
+    }
+  }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">

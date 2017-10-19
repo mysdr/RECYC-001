@@ -11,7 +11,9 @@ const state = {
   bikeList: [],
   bike: {},
   datingList: [],
-  dating: {}
+  dating: {},
+  coachList: [],
+  coach: {}
 }
 
 export default state

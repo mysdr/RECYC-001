@@ -3,13 +3,13 @@
     <div class="editor" @click="_selectAdd()">
       <Icon type="android-add-circle" class="add"></Icon>
     </div>
-    <div class="user-card"  @click="selectUser(user)">
+    <div class="user-card" v-for="coach in coachList" @click="selectUser(coach)">
       <Card>
         <div class="userinfo-title">
-          <img src="../../common/image/default.png" class="userinfo-head">
+          <img :src="coach.coach_head" class="userinfo-head">
           <div class="userinfo">
             <div>
-              zyktrcn
+              {{coach.coach_name}}
               <span>
                 <Icon type="female" class="userinfo-gender female"></Icon>
               </span>
@@ -31,7 +31,55 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import { mapGetters, mapMutations } from 'vuex'
+  import { list } from 'api/coach'
 
+  export default {
+    created() {
+      this._showList()
+    },
+    mounted() {
+      this._showList()
+    },
+    computed: {
+      ...mapGetters([
+        'token',
+        'timestamp',
+        'uid',
+        'coachList'
+      ])
+    },
+    methods: {
+      _showList() {
+        let params = {
+          uid: this.uid,
+          timestamp: this.timestamp,
+          token: this.token
+        }
+        list(params).then(res => {
+          console.log(res)
+          if (res.code === 200) {
+            this.setCoachList(res.coachs)
+          }
+        })
+      },
+      _selectAdd() {
+        this.$router.push({
+          path: '/coach/creator'
+        })
+      },
+      selectUser(coach) {
+        this.$router.push({
+          path: `/coach/${coach.id}`
+        })
+        this.setCoach(coach)
+      },
+      ...mapMutations({
+        setCoachList: 'SET_COACH_LIST',
+        setCoach: 'SET_COACH'
+      })
+    }
+  }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">

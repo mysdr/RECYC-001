@@ -14,8 +14,8 @@
         </h3>
         <h4>用户账号：{{user.user_account}}</h4>
         <h4>用户注册时间：2017.06.01</h4>
-        <h4>年龄：23岁</h4>
-        <h4>身高：170cm</h4>
+        <h4>年龄：{{user.user_age}}岁</h4>
+        <h4>身高：{{user.user_height}}cm</h4>
       </div>
       <div class="remark">
         <h3>备注</h3>

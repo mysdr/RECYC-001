@@ -33,6 +33,12 @@ const mutations = {
   },
   [types.SET_DATING](state, dating) {
     state.dating = dating
+  },
+  [types.SET_COACH_LIST](state, coachs) {
+    state.coachList = coachs
+  },
+  [types.SET_COACH](state, coach) {
+    state.coach = coach
   }
 }
 

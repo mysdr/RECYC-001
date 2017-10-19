@@ -19,3 +19,7 @@ export const SET_BIKE = 'SET_BIKE'
 export const SET_DATING_LIST = 'SET_DATING_LIST'
 
 export const SET_DATING = 'SET_DATING'
+
+export const SET_COACH_LIST = 'SET_COACH_LIST'
+
+export const SET_COACH = 'SET_COACH'

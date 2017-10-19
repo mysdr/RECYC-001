@@ -19,3 +19,7 @@ export const bike = state => state.bike
 export const datingList = state => state.datingList
 
 export const dating = state => state.dating
+
+export const coachList = state => state.coachList
+
+export const coach = state => state.coach
