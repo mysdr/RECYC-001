@@ -128,6 +128,7 @@
         width 240px
         height 30px
         margin-top -30px
+        text-align right
         color white
 
       h3
