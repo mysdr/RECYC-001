@@ -15,13 +15,13 @@
               </span>
             </div>
             <div>
-              23 岁 | 5 年
+              {{coach.coach_age}} 岁 | {{coach.coach_work_time}} 年
             </div>
             <div>
-              维尼亚健身中心
+              {{coach.coach_place}}
             </div>
             <div class="userinfo-content">
-              这个教练很懒
+              {{coach.coach_sign}}
             </div>
           </div>
         </div>

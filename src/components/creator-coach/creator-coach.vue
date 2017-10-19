@@ -3,19 +3,19 @@
     <div class="creation-info">
       <div>
         <div class="label">教练ID</div>
-        <Input ref="userId" v-model="userId" placeholder="请输入..."/>
+        <Input ref="coachId" v-model="coachId" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label">账户</div>
-        <Input ref="userAccount" v-model="userAccount" placeholder="请输入..."/>
+        <Input ref="coachAccount" v-model="coachAccount" placeholder="请输入..."/>
         <div class="label label-inline">密码</div>
-        <Input ref="userPassword" v-model="userPassword" placeholder="请输入..."/>
+        <Input ref="coachPassword" v-model="coachPassword" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label">用户名</div>
-        <Input ref="userName" v-model="userName" placeholder="请输入..."/>
+        <Input ref="coachName" v-model="coachName" placeholder="请输入..."/>
         <div class="label label-inline">性别</div>
-        <Radio-group ref="userSex" v-model="userGender">
+        <Radio-group ref="coachSex" v-model="coachGender">
           <Radio label="male">
             <Icon type="male"></Icon>
             <span class="radio">Male</span>
@@ -28,33 +28,186 @@
       </div>
       <div>
         <div class="label">年龄</div>
-        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
-        <div class="label label-inline">体重</div>
-        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <Input ref="coachAge" v-model="coachAge" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">工作时间</div>
-        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <Input ref="coachWorkTime" v-model="coachWorkTime" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">工作地方</div>
-        <Input ref="userId" v-model="userId" placeholder="请输入..."/>
+        <Input ref="coachPlace" v-model="coachPlace" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label">微信</div>
-        <Input ref="userWechat" v-model="userWechat" placeholder="请输入..."/>
+        <Input ref="coachWechat" v-model="coachWechat" placeholder="请输入..."/>
         <div class="label label-inline ">联系方式</div>
-        <Input ref="userConnect" v-model="userConnect" placeholder="请输入..."/>
+        <Input ref="coachConnect" v-model="coachConnect" placeholder="请输入..."/>
       </div>
       <div class="remark">
         <div class="label">备注</div>
-        <Input ref="userNote" v-model="userNote" type="textarea" placeholder="请输入..." :rows="5" class="textarea"/>
+        <Input ref="coachNote" v-model="coachNote" type="textarea" placeholder="请输入..." :rows="5" class="textarea"/>
       </div>
-      <Button type="primary" class="btn-create" @click="_createUser()">添加</Button>
+      <Button type="primary" class="btn-create" @click="_createCoach()">添加</Button>
     </div>
+    <div class="upload-info">
+      <div class="demo-upload-list" v-for="item in uploadList">
+        <template v-if="item.status === 'finished'">
+          <img :src="item.url">
+          <div class="demo-upload-list-cover">
+            <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
+            <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
+          </div>
+        </template>
+        <template v-else>
+          <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
+        </template>
+      </div>
+      <Upload
+        ref="upload"
+        :show-upload-list="false"
+        :default-file-list="defaultList"
+        :on-success="handleSuccess"
+        :format="['jpg','jpeg','png']"
+        :max-size="2048"
+        :on-format-error="handleFormatError"
+        :on-exceeded-size="handleMaxSize"
+        :before-upload="handleBeforeUpload"
+        multiple
+        type="drag"
+        action="//jsonplaceholder.typicode.com/posts/"
+        style="display: inline-block;width:58px;">
+        <div style="width: 58px;height:58px;line-height: 58px;">
+          <Icon type="camera" size="20"></Icon>
+        </div>
+      </Upload>
+      <Modal title="查看图片" v-model="visible">
+        <img :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'" v-if="visible" style="width: 100%">
+      </Modal>
+    </div>
+    <div class="clear"></div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import sha1 from 'sha1'
+  import { mapGetters } from 'vuex'
+  import { create } from 'api/coach'
 
+  export default {
+    mounted () {
+      this.uploadList = this.$refs.upload.fileList
+    },
+    computed: {
+      ...mapGetters([
+        'token',
+        'uid',
+        'timestamp'
+      ])
+    },
+    methods: {
+      _createCoach() {
+        let coachInfo = [this.coachId, this.coachAccount, this.coachPassword, this.coachName, this.coachGender, this.coachAge, this.coachPlace, this.coachWorkTime, this.coachWechat, this.coachConnect, this.coachNote]
+        console.log(coachInfo)
+        let i = 0
+        coachInfo.forEach((item) => {
+          if (!item) {
+            i++
+          }
+        })
+        if (i === 0) {
+          let params = {
+            uid: this.uid,
+            timestamp: this.timestamp,
+            token: this.token,
+            coach_id: this.$refs.coachId.value,
+            coach_account: this.$refs.coachAccount.value,
+            coach_password: sha1(this.$refs.coachPassword.value),
+            coach_name: this.$refs.coachName.value,
+            coach_sex: this.$refs.coachSex.value === 'male' ? 0 : 1,
+            coach_age: this.$refs.coachAge.value,
+            coach_place: this.$refs.coachPlace.value,
+            coach_work_time: this.$refs.coachWorkTime.value,
+            coach_wechat: this.$refs.coachWechat.value,
+            coach_connect: this.$refs.coachConnect.value,
+            coach_sign: this.$refs.coachNote.value
+          }
+          create(params).then(res => {
+            if (res.code === 200) {
+              this.$swal('添加成功!', '您已成功录入该会员数据！', 'success')
+              this.$router.push({
+                path: '/coach/'
+              })
+            }
+          })
+        } else if (i > 0) {
+          this.$swal('信息不全！', '请确保您已填完全部信息。', 'error')
+        }
+      },
+      handleView (name) {
+        this.imgName = name
+        this.visible = true
+      },
+      handleRemove (file) {
+        // 从 upload 实例删除数据
+        const fileList = this.$refs.upload.fileList
+        this.$refs.upload.fileList.splice(fileList.indexOf(file), 1)
+      },
+      handleSuccess (res, file) {
+        // 因为上传过程为实例，这里模拟添加 url
+        file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar'
+        file.name = '7eb99afb9d5f317c912f08b5212fd69a'
+      },
+      handleFormatError (file) {
+        this.$Notice.warning({
+          title: '文件格式不正确',
+          desc: '文件 ' + file.name + ' 格式不正确，请上传 jpg 或 png 格式的图片。'
+        })
+      },
+      handleMaxSize (file) {
+        this.$Notice.warning({
+          title: '超出文件大小限制',
+          desc: '文件 ' + file.name + ' 太大，不能超过 2M。'
+        })
+      },
+      handleBeforeUpload () {
+        const check = this.uploadList.length < 5
+        if (!check) {
+          this.$Notice.warning({
+            title: '最多只能上传 5 张图片。'
+          })
+        }
+        return check
+      }
+    },
+    // 使用v-model进行双向绑定获得值，即可进行选择
+    data() {
+      return {
+        coachId: '',
+        coachAccount: '',
+        coachPassword: '',
+        coachName: '',
+        coachGender: 'male',
+        coachAge: '',
+        coachWorkTime: '',
+        coachPlace: '',
+        coachWechat: '',
+        coachConnect: '',
+        coachNote: '',
+        defaultList: [
+          {
+            'name': 'a42bdcc1178e62b4694c830f028db5c0',
+            'url': 'https://o5wwk8baw.qnssl.com/a42bdcc1178e62b4694c830f028db5c0/avatar'
+          },
+          {
+            'name': 'bc7521e033abdd1e92222d733590f104',
+            'url': 'https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar'
+          }
+        ],
+        imgName: '',
+        visible: false,
+        uploadList: []
+      }
+    }
+  }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
@@ -63,6 +216,9 @@
   grey = #d7dde4
   white = #fff
 
+  .clear
+    clear both
+
   .creation
     width 100%
     background: white
@@ -70,6 +226,7 @@
       height 530px
 
     .creation-info
+      float left
       width 68%
       padding 10px 20px
       @media (min-width: 1524px)
@@ -194,5 +351,46 @@
           min-width 340px
         @media (min-width: 1024px) and (max-width: 1224px)
           width 50%
+
+  .upload-info
+    float: right
+    width: 25%
+    padding 35px 0
+
+  .demo-upload-list
+    display inline-block
+    width 60px
+    height 60px
+    text-align center
+    line-height 60px
+    border 1px solid transparent
+    border-radius 4px
+    overflow hidden
+    background #fff
+    position relative
+    box-shadow 0 1px 1px rgba(0,0,0,.2)
+    margin-right 4px
+
+  .demo-upload-list img
+    width 100%
+    height 100%
+
+  .demo-upload-list-cover
+    display none
+    position absolute
+    top 0
+    bottom 0
+    left 0
+    right 0
+    background rgba(0,0,0,.6)
+
+  .demo-upload-list:hover .demo-upload-list-cover
+    display block
+
+  .demo-upload-list-cover i
+    color #fff
+    font-size 20px
+    cursor pointer
+    margin 0 2px
 
 </style>

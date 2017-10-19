@@ -13,12 +13,12 @@
           <icon type="female" class="female"></icon>
         </h3>
         <h4>用户账号：{{coach.coach_account}}</h4>
-        <h4>工作时间：5年</h4>
-        <h4>工作地方：维尼亚健身中心</h4>
+        <h4>工作时间：{{coach.coach_work_time}}年</h4>
+        <h4>工作地方：{{coach.coach_place}}</h4>
       </div>
       <div class="remark">
         <h3>备注</h3>
-        <h4 ref="userNoteField" @click="_edit('user_note')">{{coach.coach_sign</h4>
+        <h4 ref="userNoteField" @click="_edit('user_note')">{{coach.coach_sign}}</h4>
       </div>
     </div>
     <div class="user-bottom">
@@ -82,15 +82,15 @@
       <div class="user-bottomright">
         <div>
           <h2>ID</h2>
-          <h3 ref="userIdField" @click="_edit('user_id')">1</h3>
+          <h3 ref="userIdField" @click="_edit('user_id')">{{coach.id}}</h3>
         </div>
         <div>
           <h2>微信</h2>
-          <h3>1</h3>
+          <h3>{{coach.coach_wechat}}</h3>
         </div>
         <div>
           <h2>电话</h2>
-          <h3 ref="userConnectField" @click="_edit('user_connect')">1</h3>
+          <h3 ref="userConnectField" @click="_edit('user_connect')">{{coach.coach_connect}}</h3>
         </div>
       </div>
     </div>
@@ -100,7 +100,7 @@
 <script>
   import Star from 'base/star/star'
   import { mapGetters, mapMutations } from 'vuex'
-//  import { remove, edit } from 'api/coach'
+  import { remove } from 'api/coach'
 
   export default {
     data () {
@@ -124,11 +124,38 @@
           path: '/coach/creator'
         })
       },
-      _selectDelete() {
-      },
       _selectEdit() {
       },
       _edit(field) {
+      },
+      _selectDelete() {
+        let params = {
+          uid: this.uid,
+          token: this.token,
+          timestamp: this.timestamp
+        }
+        this.$swal({
+          title: '是否确定',
+          text: '您将删除该课程，该操作不可逆!',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#DD6B55',
+          confirmButtonText: '删除',
+          cancelButtonText: '取消',
+          closeOnConfirm: false,
+          closeOnCancel: false
+        }, function (isConfirm) {
+          if (isConfirm) {
+            remove(params, this.coach.id).then(res => {
+              if (res.code === 0) {
+                this.$swal('删除成功!', '您已成功删除该约课数据！', 'success')
+                this.$router.push({
+                  path: '/coach'
+                })
+              }
+            })
+          }
+        })
       },
       ...mapMutations({
         setCoach: 'SET_COACH'

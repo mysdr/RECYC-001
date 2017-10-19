@@ -10,3 +10,13 @@ export function detail(params) {
   const url = HOST + `/v2/coachs/detail`
   return jsonp(url, params)
 }
+
+export function create(params) {
+  const url = HOST + `/v2/coachs/create`
+  return jsonp(url, params)
+}
+
+export function remove(params, id) {
+  const url = HOST + `/v2/coachs/remove/${id}`
+  return jsonp(url, params)
+}
