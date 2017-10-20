@@ -21,6 +21,36 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+var apiRoutes = express.Router()
+var multiparty = require('multiparty');
+var util = require('util');
+var fs = require('fs');
+var $ = require('jquery');
+
+apiRoutes.post('/upload', function(req, res, next){
+  let formData = new FormData()
+  formData.append('file', file)
+  formData.append('token', this.qiniuToken)
+  $.ajax({
+    url: 'http://upload.qiniu.com/',
+    type: 'POST',
+    dataType: 'json',
+    cache: false,
+    data: formData,
+    processData: false,
+    contentType: false
+  }).done(res => {
+    console.log(res)
+    file.name = res.key
+    file.url = 'http://airing.ursb.me/' + res.key
+  }).fail(err => {
+    console.log(err)
+  })
+});
+
+app.use('/api', apiRoutes)
+
+
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
