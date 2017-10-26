@@ -16,6 +16,11 @@ export function create(params) {
   return jsonp(url, params)
 }
 
+export function edit(params, id, field) {
+  const url = HOST + `/v2/coachs/edit/${field}/${id}`
+  return jsonp(url, params)
+}
+
 export function remove(params, id) {
   const url = HOST + `/v2/coachs/remove/${id}`
   return jsonp(url, params)

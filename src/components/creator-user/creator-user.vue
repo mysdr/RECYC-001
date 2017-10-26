@@ -30,55 +30,55 @@
         <div class="label">年龄</div>
         <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">身高</div>
-        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <Input ref="userHeight" v-model="userHeight" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">体重</div>
-        <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">肌肉量</div>
-        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <Input ref="userMuscle" v-model="userMuscle" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">骨质量</div>
-        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <Input ref="userBone" v-model="userBone" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">蛋白质</div>
-        <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+        <Input ref="userProtein" v-model="userProtein" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">去脂体重</div>
-        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <Input ref="userWeightWithoutFat" v-model="userWeightWithoutFat" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">体脂肪量</div>
-        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
-        <div class="label label-inline">身体水分</div>
         <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+        <div class="label label-inline">身体水分</div>
+        <Input ref="userWater" v-model="userWater" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">腰臀比</div>
-        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <Input ref="userWhr" v-model="userWhr" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">体质指数</div>
-        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <Input ref="userBmi" v-model="userBmi" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">体脂%</div>
-        <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+        <Input ref="userPbf" v-model="userPbf" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">内脏脂肪</div>
-        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <Input ref="userVisceralFat" v-model="userVisceralFat" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">标准体重</div>
-        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <Input ref="userSbw" v-model="userSbw" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">控制体重</div>
-        <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+        <Input ref="userWeightControl" v-model="userWeightControl" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">基础代谢</div>
-        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <Input ref="userBasalMetabolism" v-model="userBasalMetabolism" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">健康评分</div>
-        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <Input ref="userHealthScore" v-model="userHealthScore" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">控制脂肪</div>
-        <Input ref="userFat" v-model="userFat" placeholder="请输入..." class="input-small"/>
+        <Input ref="userControlFat" v-model="userControlFat" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">控制肌肉</div>
-        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
+        <Input ref="userControlMuscle" v-model="userControlMuscle" placeholder="请输入..." class="input-small"/>
         <div class="label label-inline">生理年龄</div>
-        <Input ref="userWeight" v-model="userWeight" placeholder="请输入..." class="input-small"/>
+        <Input ref="userAge" v-model="userAge" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label">微信</div>
@@ -92,44 +92,6 @@
       </div>
       <Button type="primary" class="btn-create" @click="_createUser()">添加</Button>
     </div>
-    <div class="upload-info">
-      <div class="demo-upload-list" v-for="item in uploadList">
-        <template v-if="item.status === 'finished'">
-          <img :src="item.url">
-          <div class="demo-upload-list-cover">
-            <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
-            <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
-          </div>
-        </template>
-        <template v-else>
-          <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
-        </template>
-      </div>
-      <Upload
-          ref="upload"
-          :show-upload-list="false"
-          :default-file-list="defaultList"
-          :on-success="handleSuccess"
-          :format="['png', 'jpg', 'jpeg']"
-          :max-size="2048"
-          :on-format-error="handleFormatError"
-          :on-exceeded-size="handleMaxSize"
-          :before-upload="handleBeforeUpload"
-          multiple
-          type="drag"
-          action="//upload.qiniu.com/"
-          :data="{token: this.qiniuToken, key: '/recyc/user/' + this.uid + '.png'}"
-          :headers="{'Access-Control-Allow-Origin': '*'}"
-          style="display: inline-block;width:58px;">
-        <div style="width: 58px;height:58px;line-height: 58px;">
-          <Icon type="camera" size="20"></Icon>
-        </div>
-      </Upload>
-      <Modal title="查看图片" v-model="visible">
-        <img :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'" v-if="visible" style="width: 100%">
-      </Modal>
-    </div>
-    <div class="clear"></div>
   </div>
 </template>
 
@@ -137,7 +99,6 @@
   import sha1 from 'sha1'
   import { mapGetters } from 'vuex'
   import { create } from 'api/user'
-  import { getToken } from 'api/util'
 
   export default {
     data() {
@@ -148,17 +109,27 @@
         userName: '',
         userGender: 'male',
         userAge: '',
+        userHeight: '',
         userWeight: '',
+        userMuscle: '',
+        userBone: '',
+        userProtein: '',
+        userWeightWithoutFat: '',
         userFat: '',
+        userWater: '',
+        userWhr: '',
+        userBmi: '',
+        userPbf: '',
+        userVisceralFat: '',
+        userSbw: '',
+        userWeightControl: '',
+        userBasalMetabolism: '',
+        userHealthScore: '',
+        userControlFat: '',
+        userControlMuscle: '',
         userWechat: '',
         userConnect: '',
-        userNote: '',
-        defaultList: [],
-        imgName: '',
-        visible: false,
-        uploadList: [],
-        qiniuToken: '',
-        file: {}
+        userNote: ''
       }
     },
     computed: {
@@ -167,18 +138,6 @@
         'uid',
         'timestamp'
       ])
-    },
-    mounted () {
-      this.uploadList = this.$refs.upload.fileList
-      let params = {
-        uid: this.uid,
-        timestamp: this.timestamp,
-        token: this.token,
-        filename: '/recyc/user/' + this.uid + '.png'
-      }
-      getToken(params).then(res => {
-        this.qiniuToken = res.qiniu_token
-      })
     },
     methods: {
       _createUser() {
@@ -200,8 +159,24 @@
             user_name: this.$refs.userName.value,
             user_sex: this.$refs.userSex.value === 'male' ? 0 : 1,
             user_age: this.$refs.userAge.value,
+            user_height: this.$refs.userHeight.value,
             user_weight: this.$refs.userWeight.value,
+            user_muscle: this.$refs.userMuscle.value,
+            user_bone: this.$refs.userBone.value,
+            user_protein: this.$refs.userProtein.value,
+            user_weight_without_fat: this.$refs.userWeightWithoutFat.value,
             user_fat: this.$refs.userFat.value,
+            user_water: this.$refs.userWater.value,
+            user_whr: this.$refs.userWhr.value,
+            user_bmi: this.$refs.userBmi.value,
+            user_pbf: this.$refs.userPbf.value,
+            user_visceral_fat: this.$refs.userVisceralFat.value,
+            user_sbw: this.$refs.userSbw.value,
+            user_weight_control: this.$refs.userWeightControl.value,
+            user_basal_metabolism: this.$refs.userBasalMetabolism.value,
+            user_health_score: this.$refs.userHealthScore.value,
+            user_control_fat: this.$refs.userControlFat.value,
+            user_control_muscle: this.$refs.userControlMuscle.value,
             user_wechat: this.$refs.userWechat.value,
             user_connect: this.$refs.userConnect.value,
             user_note: this.$refs.userNote.value
@@ -217,42 +192,6 @@
         } else if (i > 0) {
           this.$swal('信息不全！', '请确保您已填完全部信息。', 'error')
         }
-      },
-      handleView (name) {
-        this.imgName = name
-        this.visible = true
-      },
-      handleRemove (file) {
-        // 从 upload 实例删除数据
-        const fileList = this.$refs.upload.fileList
-        this.$refs.upload.fileList.splice(fileList.indexOf(file), 1)
-      },
-      handleSuccess (res, file) {
-        file.name = res.key
-        file.url = 'http://airing.ursb.me/' + res.key
-        // TODO: 将用户的头像 url 更新为 file.url
-      },
-      handleFormatError (file) {
-        this.$Notice.warning({
-          title: '文件格式不正确',
-          desc: '文件 ' + file.name + ' 格式不正确，请上传 jpg 或 png 格式的图片。'
-        })
-      },
-      handleMaxSize (file) {
-        this.$Notice.warning({
-          title: '超出文件大小限制',
-          desc: '文件 ' + file.name + ' 太大，不能超过 2M。'
-        })
-      },
-      handleBeforeUpload (file) {
-        console.log(file)
-        const check = this.uploadList.length < 1
-        if (!check) {
-          this.$Notice.warning({
-            title: '最多只能上传 1 张图片。'
-          })
-        }
-        return check
       }
     }
   }
@@ -397,48 +336,4 @@
           min-width 340px
         @media (min-width: 1024px) and (max-width: 1224px)
           width 50%
-
-  .upload-info
-    float: right
-    width: 25%
-    padding 35px 0
-
-  .demo-upload-list
-    display inline-block
-    width 60px
-    height 60px
-    text-align center
-    line-height 60px
-    border 1px solid transparent
-    border-radius 4px
-    overflow hidden
-    background #fff
-    position relative
-    box-shadow 0 1px 1px rgba(0, 0, 0, .2)
-    margin-right 4px
-
-  .demo-upload-list img
-    width 100%
-    height 100%
-
-  .demo-upload-list-cover
-    display none
-    position absolute
-    top 0
-    bottom 0
-    left 0
-    right 0
-    background rgba(0, 0, 0, .6)
-
-  .demo-upload-list:hover .demo-upload-list-cover
-    display block
-
-  .demo-upload-list-cover i
-    color #fff
-    font-size 20px
-    cursor pointer
-    margin 0 2px
-
-  .clear
-    clear both
 </style>

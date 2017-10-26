@@ -6,7 +6,7 @@
     <div class="user-card" v-for="coach in coachList" @click="selectUser(coach)">
       <Card>
         <div class="userinfo-title">
-          <img :src="coach.coach_head" class="userinfo-head">
+          <img :src="coach.coach_face" class="userinfo-head">
           <div class="userinfo">
             <div>
               {{coach.coach_name}}

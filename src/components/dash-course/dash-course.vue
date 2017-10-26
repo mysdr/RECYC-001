@@ -6,7 +6,7 @@
     <div class="course-card" v-for="course in courseList" @click="selectCourse(course)">
       <Card>
         <div class="course-info">
-          <img src="./default.jpg" class="course-img">
+          <img :src="course.course_title_img" width="246" height="120">
           <h3>{{course.course_name}}</h3>
           <h4>导师：{{course.course_teacher}}</h4>
           <div>课程ID：{{course.course_id}}</div>
