@@ -6,7 +6,7 @@
     <div class="course-card"  v-for="dating in datingList" @click="selectDating(dating)">
       <Card>
         <div class="course-info">
-          <img src="./default.jpg" class="course-img">
+          <img :src="dating.dating_title_img" width="246" height="120" class="course-img">
           <div class="course-star">
             <star :size="24" :rating="dating.dating_rating" class="star"></star>
           </div>
