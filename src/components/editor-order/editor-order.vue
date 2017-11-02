@@ -54,14 +54,14 @@
               </Modal>
             </div>
             <div>
-              <h2>{{dating.course_name}}</h2>
+              <h2>{{dating.course.course_name}}</h2>
               <h3>课程ID：{{dating.courseId}}</h3>
-              <h3 ref="courseTeacherField" @click="_edit('course_teacher')">课程导师：{{dating.course_teacher}}</h3>
-              <h3>注册时间：2017-04-14</h3>
+              <h3 ref="courseTeacherField" @click="_edit('course_teacher')">课程导师：{{dating.course.coach_name}}</h3>
+              <h3>注册时间：{{_toDate(dating.dating_register)}}</h3>
             </div>
           </Tab-pane>
           <Tab-pane label="课程简介">
-            <h3>{{dating.course_content}}</h3>
+            <h3>{{dating.course.course_content}}</h3>
           </Tab-pane>
         </Tabs>
       </div>
@@ -69,12 +69,12 @@
         <div>
           <h3 ref="datingIdField" @click="_edit('dating_id')">约课ID： {{dating.dating_id}}</h3>
           <h3 ref="datingCapacityField" @click="_edit('dating_capacity')">本期约课容量： {{dating.dating_capacity}}人</h3>
-          <h3>本期约课地点： 维尼亚健身中心</h3>
+          <h3>本期约课地点： {{dating.dating_time}}</h3>
           <h3>本期约课时间段： {{dating.dating_time}}</h3>
           <h3>本期约课注册时间： {{_toDate(dating.dating_register)}}</h3>
         </div>
         <div>
-          <h2>300￥</h2>
+          <h2>{{dating.course.course_price}}￥</h2>
           <star :size="36" :rating="dating.dating_rating" class="star"></star>
           <h4>评价星数</h4>
         </div>

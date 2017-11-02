@@ -11,7 +11,7 @@
             <div>
               {{coach.coach_name}}
               <span>
-                <Icon type="female" class="userinfo-gender female"></Icon>
+                <Icon :type="coach.coach_sex == 0 ? 'male':'female'" :class="coach.coach_sex == 0 ? 'male':'female'"></Icon>
               </span>
             </div>
             <div>
@@ -151,12 +151,13 @@
         padding 2px 15px
         font-size 0.8em
         font-weight 600
-      .userinfo-gender
+      .female
         padding 3px
         font-size 1.2em
-      .female
         color: pink
       .male
+        padding 3px
+        font-size 1.2em
         color: blue
     .userinfo-content
       width 100%

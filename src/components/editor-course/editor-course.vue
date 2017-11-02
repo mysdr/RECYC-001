@@ -57,14 +57,14 @@
     </div>
     <div class="course-bottom">
       <div class="course-teacher">
-        <img src="../../common/image/default.png">
+        <img :src="course.coach.coach_face">
         <div>
           <h2>
-            <span ref="courseTeacherField" @click="_edit('course_teacher')">导师：{{course.course_teacher}}</span>
-            <icon type="female" class="female"></icon>
+            <span ref="courseTeacherField" @click="_edit('course_teacher')">导师：{{course.coach_name}}</span>
+            <icon :type="course.coach.coach_sex == 0 ? 'male':'female'" :class="course.coach.coach_sex == 0 ? 'male':'female'"></icon>
           </h2>
-          <h3>微信：airing</h3>
-          <h3>联系方式：13188888888</h3>
+          <h3>微信：{{course.coach.coach_wechat}}</h3>
+          <h3>联系方式：{{course.coach.coach_connect}}</h3>
         </div>
       </div>
       <div class="course-content">

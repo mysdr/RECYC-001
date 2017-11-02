@@ -51,7 +51,7 @@
       <div class="userinfo">
         <h3>
           <span ref="userNameField" @click="_edit('user_name')">{{user.user_name}}</span>
-          <icon type="female" class="female"></icon>
+          <icon :type="user.user_sex == 0 ? 'male':'female'" :class="user.user_sex == 0 ? 'male':'female'"></icon>
         </h3>
         <h4>用户账号：{{user.user_account}}</h4>
         <h4>用户注册时间：2017.06.01</h4>

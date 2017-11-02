@@ -11,13 +11,13 @@
             <star :size="24" :rating="dating.dating_rating" class="star"></star>
           </div>
           <div class="course-price">
-            300￥
+            {{dating.course.course_price}}￥
           </div>
-          <h3>{{dating.course_name}}</h3>
-          <h4>导师：{{dating.course_teacher}}</h4>
+          <h3>{{dating.course.course_name}}</h3>
+          <h4>导师：{{dating.course.coach_name}}</h4>
           <div>约课ID：{{dating.dating_id}}</div>
           <div>约课容量：{{dating.dating_capacity}} 人</div>
-          <div>约课地点：维尼亚健身中心</div>
+          <div>约课地点：{{dating.dating_place}}</div>
           <div>约课时间段：{{dating.dating_time}}</div>
           <div>约课注册时间：{{_toDate(dating.dating_register)}}</div>
         </div>
