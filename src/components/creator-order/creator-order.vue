@@ -2,12 +2,16 @@
   <div class="creation">
     <div class="creation-info">
       <div>
+        <div class="label">约课ID</div>
+        <Input ref="datingId" v-model="datingId" placeholder="请输入..."/>
+      </div>
+      <div>
         <div class="label">课程ID</div>
         <Input ref="courseId" v-model="courseId" placeholder="请输入..."/>
       </div>
       <div>
-        <div class="label">约课ID</div>
-        <Input ref="datingId" v-model="datingId" placeholder="请输入..."/>
+        <div class="label">教练ID</div>
+        <Input ref="courseId" v-model="coachId" placeholder="请输入..."/>
       </div>
       <div>
         <div class="label label-inline">约课容量</div>
@@ -15,13 +19,21 @@
       </div>
       <div>
         <div class="label">约课地点</div>
-        <Input ref="datingId" v-model="datingId" placeholder="请输入..."/>
+        <Input ref="datingPlace" v-model="datingPlace" placeholder="请输入..."/>
       </div>
       <div>
-        <div class="label">约课时间段</div>
+        <div class="label">约课时间</div>
         <Row class="datepicker">
           <Col span="24">
-            <Date-picker type="daterange" v-model="datingTime" placeholder="选择时间" @on-change="onChangeDate"></Date-picker>
+          <TimePicker type="timerange" v-model="datingTime" format="HH:mm" placeholder="选择时间" :value="datingTime"></TimePicker>
+          </Col>
+        </Row>
+      </div>
+      <div>
+        <div class="label">约课日期</div>
+        <Row class="datepicker">
+          <Col span="24">
+            <DatePicker type="date" v-model="datingDate" format="yyyy-MM-dd" placeholder="选择日期" :value="datingDate"></DatePicker>
           </Col>
         </Row>
       </div>
@@ -38,9 +50,12 @@
     data() {
       return {
         courseId: '',
+        coachId: '',
         datingId: '',
+        datingPlace: '',
         datingCapacity: '',
-        datingTime: []
+        datingTime: [],
+        datingDate: ''
       }
     },
     mounted () {
@@ -54,15 +69,34 @@
     },
     methods: {
       _createOrder () {
+        let hour0 = this.datingTime[0].getHours()
+        let minute0 = this.datingTime[0].getMinutes()
+        if (hour0 < 10) {
+          hour0 = '0' + hour0
+        }
+        if (minute0 < 10) {
+          minute0 = '0' + minute0
+        }
+        let hour1 = this.datingTime[1].getHours()
+        let minute1 = this.datingTime[1].getMinutes()
+        if (hour1 < 10) {
+          hour1 = '0' + hour1
+        }
+        if (minute1 < 10) {
+          minute1 = '0' + minute1
+        }
         let params = {
           uid: this.uid,
           token: this.token,
           timestamp: this.timestamp,
-          course_id: this.courseId,
+          courseId: this.courseId,
+          coachId: this.coachId,
           dating_id: this.datingId,
+          dating_place: this.datingPlace,
           dating_rating: 0,
           dating_users: '',
-          dating_time: this.datingTime[0] + '-' + this.datingTime[1],
+          dating_time: hour0 + ':' + minute0 + '-' + hour1 + ':' + minute1,
+          dating_date: this.datingDate.getFullYear() + '-' + this.datingDate.getMonth() + '-' + this.datingDate.getDate(),
           dating_capacity: this.datingCapacity,
           dating_register: +new Date()
         }
@@ -76,10 +110,6 @@
             })
           }
         })
-      },
-      onChangeDate(value) {
-        console.log(value)
-        this.datingTime = value
       }
     }
   }
@@ -202,4 +232,7 @@
           min-width 340px
         @media (min-width: 1024px) and (max-width: 1224px)
           width 50%
+
+  .clear
+    clear both
 </style>

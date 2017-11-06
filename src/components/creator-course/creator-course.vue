@@ -10,12 +10,20 @@
         <Input ref="courseName" v-model="courseName" placeholder="请输入..."/>
       </div>
       <div>
-        <div class="label">导师</div>
-        <Input ref="courseId" v-model="courseTeacher" placeholder="请输入..."/>
+        <div class="label">导师ID</div>
+        <Input ref="coachId" v-model="coachId" placeholder="请输入..."/>
       </div>
       <div>
-        <div class="label">导师电话</div>
-        <Input type="number" ref="courseId" v-model="courseTeacherNumber" placeholder="请输入..."/>
+        <div class="label">导师姓名</div>
+        <Input ref="coachName" v-model="coachName" placeholder="请输入..."/>
+      </div>
+      <div>
+        <div class="label label-inline">课程类别</div>
+        <Input type="number" ref="courseType" v-model="courseType" placeholder="请输入..." class="input-small"/>
+      </div>
+      <div>
+        <div class="label label-inline">课程价格</div>
+        <Input type="number" ref="coursePrice" v-model="coursePrice" placeholder="请输入..." class="input-small"/>
       </div>
       <div>
         <div class="label label-inline">课程容量</div>
@@ -40,8 +48,10 @@
       return {
         courseId: '',
         courseName: '',
-        courseTeacher: '',
-        courseTeacherNumber: '',
+        coachId: '',
+        coachName: '',
+        courseType: '',
+        coursePrice: '',
         courseCapacity: '',
         courseContent: ''
       }
@@ -64,7 +74,10 @@
           course_id: this.courseId,
           course_name: this.courseName,
           course_content: this.courseContent,
-          course_teacher: this.courseTeacher,
+          coachId: this.coachId,
+          coach_name: this.coachName,
+          course_type: this.courseType,
+          course_price: this.coursePrice,
           course_capacity: this.courseCapacity,
           course_register: +new Date()
         }

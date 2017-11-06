@@ -67,11 +67,12 @@
       </div>
       <div class="order-info">
         <div>
-          <h3 ref="datingIdField" @click="_edit('dating_id')">约课ID： {{dating.dating_id}}</h3>
+          <h3 ref="datingIdField" @click="_edit('dating_id')">约课ID： {{dating.id}}</h3>
           <h3 ref="datingCapacityField" @click="_edit('dating_capacity')">本期约课容量： {{dating.dating_capacity}}人</h3>
-          <h3>本期约课地点： {{dating.dating_time}}</h3>
+          <h3>本期约课地点： {{dating.dating_place}}</h3>
+          <h3>本期约课日期： {{dating.dating_date}}</h3>
           <h3>本期约课时间段： {{dating.dating_time}}</h3>
-          <h3>本期约课注册时间： {{_toDate(dating.dating_register)}}</h3>
+          <!--<h3>本期约课注册时间： {{_toDate(dating.dating_register)}}</h3>-->
         </div>
         <div>
           <h2>{{dating.course.course_price}}￥</h2>

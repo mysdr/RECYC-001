@@ -6,6 +6,10 @@
         <Input ref="coachId" v-model="coachId" placeholder="请输入..."/>
       </div>
       <div>
+        <div class="label">健身房ID</div>
+        <Input ref="companyId" v-model="companyId" placeholder="请输入..."/>
+      </div>
+      <div>
         <div class="label">账户</div>
         <Input ref="coachAccount" v-model="coachAccount" placeholder="请输入..."/>
         <div class="label label-inline">密码</div>
@@ -83,6 +87,7 @@
             timestamp: this.timestamp,
             token: this.token,
             coach_id: this.$refs.coachId.value,
+            company_id: this.$refs.companyId.value,
             coach_account: this.$refs.coachAccount.value,
             coach_password: sha1(this.$refs.coachPassword.value),
             coach_name: this.$refs.coachName.value,
@@ -111,6 +116,7 @@
     data() {
       return {
         coachId: '',
+        companyId: '',
         coachAccount: '',
         coachPassword: '',
         coachName: '',

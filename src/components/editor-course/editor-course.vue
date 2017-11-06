@@ -50,7 +50,7 @@
       </Modal>
       <div>
         <h2 ref="courseNameField" @click="_edit('course_name')">{{course.course_name}}</h2>
-        <h3 ref="courseIdField" @click="_edit('course_id')">ID：{{course.course_id}}</h3>
+        <h3 ref="courseIdField" @click="_edit('course_id')">ID：{{course.id}}</h3>
         <h3 ref="courseCapacityField" @click="_edit('course_capacity')">容量：{{course.course_capacity}} 人</h3>
         <h3>注册时间：{{_toDate(course.course_register)}}</h3>
       </div>

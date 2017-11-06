@@ -175,58 +175,14 @@
     </div>
     <div class="user-bottom">
       <div class="user-bottomleft">
-        <div class="lesson">
+        <div class="lesson" v-for="record in user.records">
           <ul>
-            <li>2017.06.09</li>
-            <li>14:00 - 17:00</li>
-            <li>健身课程001</li>
-            <li>3h</li>
+            <li>{{record.dating_date}}</li>
+            <li>{{record.dating_start}} - {{record.dating_end}}</li>
+            <li>{{record.course_name}}</li>
+            <li>{{record.dating_time}}h</li>
             <li>
-              <star :size="24" :rating="5" class="star"></star>
-            </li>
-          </ul>
-        </div>
-        <div class="lesson">
-          <ul>
-            <li>2017.06.09</li>
-            <li>14:00 - 17:00</li>
-            <li>健身课程001</li>
-            <li>3h</li>
-            <li>
-              <star :size="24" :rating="5" class="star"></star>
-            </li>
-          </ul>
-        </div>
-        <div class="lesson">
-          <ul>
-            <li>2017.06.09</li>
-            <li>14:00 - 17:00</li>
-            <li>健身课程001</li>
-            <li>3h</li>
-            <li>
-              <star :size="24" :rating="5" class="star"></star>
-            </li>
-          </ul>
-        </div>
-        <div class="lesson">
-          <ul>
-            <li>2017.06.09</li>
-            <li>14:00 - 17:00</li>
-            <li>健身课程001</li>
-            <li>3h</li>
-            <li>
-              <star :size="24" :rating="5" class="star"></star>
-            </li>
-          </ul>
-        </div>
-        <div class="lesson">
-          <ul>
-            <li>2017.06.09</li>
-            <li>14:00 - 17:00</li>
-            <li>健身课程001</li>
-            <li>3h</li>
-            <li>
-              <star :size="24" :rating="5" class="star"></star>
+              <star :size="24" :rating="record.dating_rating" class="star"></star>
             </li>
           </ul>
         </div>
@@ -234,7 +190,7 @@
       <div class="user-bottomright">
         <div>
           <h2>ID</h2>
-          <h3 ref="userIdField" @click="_edit('user_id')">{{user.user_id}}</h3>
+          <h3 ref="userIdField" @click="_edit('user_id')">{{user.id}}</h3>
         </div>
         <div>
           <h2>微信</h2>

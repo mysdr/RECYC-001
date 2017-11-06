@@ -9,7 +9,7 @@
           <img :src="course.course_title_img" width="246" height="120">
           <h3>{{course.course_name}}</h3>
           <h4>导师：{{course.coach_name}}</h4>
-          <div>课程ID：{{course.course_id}}</div>
+          <div>课程ID：{{course.id}}</div>
           <div>容量：{{course.course_capacity}} 人</div>
           <div>注册时间：{{_toDate(course.course_register)}}</div>
         </div>
